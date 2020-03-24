@@ -22,5 +22,9 @@ describe('Recipe Class', function(){
     expect(recipe).to.be.an.instanceof(Recipe)
   });
 
+  it('should initilize with an ID', function(){
+    expect(recipe.id).to.eq(595736);
+  });
+
 
 });
