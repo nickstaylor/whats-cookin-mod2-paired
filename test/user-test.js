@@ -33,6 +33,10 @@ describe('User', function(){
     expect(user.id).to.equal(1);
   });
 
-  
+  it('should initilize with a personal pantry', function(){
+    expect(user.pantry).to.equal(userInfo.pantry)
+  });
+
+
 
 });
