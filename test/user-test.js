@@ -29,6 +29,10 @@ describe('User', function(){
     expect(user.name).to.equal('Saige O\'Kon')
   });
 
+  it('should initialize with an id', function(){
+    expect(user.id).to.equal(1);
+  });
 
+  
 
 });
