@@ -34,5 +34,9 @@ describe('Recipe Class', function(){
     expect(recipe.ingredients).to.deep.eq(singleRecipe.ingredients);
   });
 
+  it('should initialize with an array of instructions', function(){
+    expect(recipe.instructions).to.deep.eq(singleRecipe.instructions)
+  });
+
 
 });
