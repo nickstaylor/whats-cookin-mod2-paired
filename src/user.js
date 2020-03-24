@@ -8,7 +8,9 @@ class User {
   }
 
 
-
+  addToMyFavoriteRecipes(recipe) {
+    this.favoriteRecipes.push(recipe);
+  }
 
 
 
