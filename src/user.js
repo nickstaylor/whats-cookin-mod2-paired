@@ -1,6 +1,6 @@
 class User {
-  constructor() {
-
+  constructor(user) {
+    this.name = user.name;
   }
 
 
@@ -20,4 +20,4 @@ class User {
 
 
 
-module.exports = User
+module.exports = User;
