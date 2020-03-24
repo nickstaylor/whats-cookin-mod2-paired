@@ -37,6 +37,9 @@ describe('User', function(){
     expect(user.pantry).to.equal(userInfo.pantry)
   });
 
+  it('should initilize with an empty favoriteRecipes', function(){
+    expect(user.favoriteRecipes).to.deep.equal([]);
+  });
 
 
 });
