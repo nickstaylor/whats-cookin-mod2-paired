@@ -5,6 +5,7 @@ class Recipe {
     this.ingredients = recipe.ingredients;
     this.instructions = recipe.instructions;
     this.name = recipe.name;
+    this.tags = recipe.tags;
   }
 }
 
