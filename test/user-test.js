@@ -3,19 +3,32 @@ const expect = chai.expect;
 
 const User = require('../src/user');
 
+const data = require('../data/users');
+
+
 describe('User', function(){
+  let user;
+  let userInfo;
+  let recipe;
+
+  beforeEach(function() {
+    userInfo = data[0];
+    user = new User(userInfo);
+
+  })
 
   it('should be a function', function(){
     expect(User).to.be.a('function');
   });
 
   it('should be instance of User', function(){
-    const user = new User();
     expect(user).to.be.an.instanceof(User);
   });
 
-  it('should initilize with an id', function(){
-    
+  it('should initialize with a name', function(){
+    expect(user.name).to.equal('Saige O\'Kon')
   });
+
+
 
 });
