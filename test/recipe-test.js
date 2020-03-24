@@ -38,8 +38,19 @@ describe('Recipe Class', function(){
     expect(recipe.instructions).to.deep.eq(singleRecipe.instructions)
   });
 
-  it('should initilize with a name', function(){
+  it('should initialize with a name', function(){
     expect(recipe.name).to.eq("Loaded Chocolate Chip Pudding Cookie Cups");
+  });
+
+  it('should initialize with tags', function(){
+    expect(recipe.tags).to.deep.eq([
+        "antipasti",
+        "starter",
+        "snack",
+        "appetizer",
+        "antipasto",
+        "hor d'oeuvre"
+    ])
   });
 
 
