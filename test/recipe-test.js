@@ -38,5 +38,9 @@ describe('Recipe Class', function(){
     expect(recipe.instructions).to.deep.eq(singleRecipe.instructions)
   });
 
+  it('should initilize with a name', function(){
+    expect(recipe.name).to.eq("Loaded Chocolate Chip Pudding Cookie Cups");
+  });
+
 
 });
