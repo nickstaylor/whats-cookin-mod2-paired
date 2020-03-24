@@ -53,5 +53,9 @@ describe('Recipe Class', function(){
     ])
   });
 
+  it('should start off as not favorited', function(){
+    expect(recipe.isFavorited).to.eq(false);
+  });
+
 
 });
