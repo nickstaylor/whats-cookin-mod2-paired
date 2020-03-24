@@ -26,5 +26,9 @@ describe('Recipe Class', function(){
     expect(recipe.id).to.eq(595736);
   });
 
+  it('should initialize with a recipe image', function(){
+    expect(recipe.image).to.eq(singleRecipe.image);
+  });
+
 
 });
