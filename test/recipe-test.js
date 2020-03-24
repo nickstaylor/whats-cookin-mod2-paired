@@ -30,5 +30,9 @@ describe('Recipe Class', function(){
     expect(recipe.image).to.eq(singleRecipe.image);
   });
 
+  it('should initialize with an array of ingredients', function(){
+    expect(recipe.ingredients).to.deep.eq(singleRecipe.ingredients);
+  });
+
 
 });
