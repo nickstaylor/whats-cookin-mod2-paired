@@ -42,4 +42,9 @@ describe('User', function(){
   });
 
 
+  it('should start with empty recipes to cook', function(){
+    expect(user.recipesToCook).to.deep.equal([])
+  });
+
+
 });
