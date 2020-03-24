@@ -2,19 +2,20 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const User = require('../src/user');
+const Recipe = require('../src/recipe');
 
-const data = require('../data/users');
-
+const userData = require('../data/users');
+const recipeData = require('../data/recipes');
 
 describe('User', function(){
   let user;
   let userInfo;
-  let recipe;
+  let recipe1;
+  let recipe2;
 
   beforeEach(function() {
-    userInfo = data[0];
+    userInfo = userData[0];
     user = new User(userInfo);
-
   })
 
   it('should be a function', function(){
@@ -44,6 +45,19 @@ describe('User', function(){
 
   it('should start with empty recipes to cook', function(){
     expect(user.recipesToCook).to.deep.equal([])
+  });
+
+
+  describe('addToMyFavoriteRecipes Method', function(){
+
+    it('should be able to add recipes to favoriteRecipes', function(){
+      expect(user.favoriteRecipes.length).to.deep.eq(0);
+      recipe1 = new Recipe(recipeData[0]);
+      user.addToMyFavoriteRecipes(recipe1)
+      expect(user.favoriteRecipes.length).to.deep.eq(1);
+    });
+
+
   });
 
 
