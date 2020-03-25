@@ -59,6 +59,11 @@ describe('Pantry', function(){
   it('should be a function', function(){
     expect(Pantry).to.be.a("function");
   });
+  it('should be an instance of Pantry', function(){
+    const pantry = new Pantry(listOfIngredients);
+    expect(pantry).to.be.an.instanceof(Pantry);
+
+  })
 
 
 });
