@@ -94,9 +94,8 @@ describe('User', function(){
     expect(user.id).to.equal(1);
   });
 
-  it.skip('should initialize with a personal pantry', function(){
-    console.log(user);
-    expect(user.pantry).to.deep.equal()
+  it('should initialize with a personal pantry', function(){
+    expect(user.pantry).to.be.an.instanceof(Pantry)
   });
 
   it('should initilize with an empty favoriteRecipes', function(){
