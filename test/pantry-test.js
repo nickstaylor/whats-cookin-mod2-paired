@@ -26,33 +26,6 @@ let userPantryIngredients = [
   }
 ];
 
-let listOfIngredients = [
-  {
-  "id": 11477,
-  "name": "wheat flour",
-  "estimatedCostInCents": 142
-  },
-  {
-  "id": 18372,
-  "name": "bicarbonate of soda",
-  "estimatedCostInCents": 582
-  },
-  {
-  "id": 20081,
-  "name": "eggs",
-  "estimatedCostInCents": 472
-  },
-  {
-  "id": 19335,
-  "name": "sucrose",
-  "estimatedCostInCents": 902
-  },
-  {
-  "id": 19206,
-  "name": "instant vanilla pudding",
-  "estimatedCostInCents": 660
-  }
-];
 
 describe('Pantry', function(){
 
