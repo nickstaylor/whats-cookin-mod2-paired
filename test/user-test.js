@@ -5,9 +5,7 @@ const User = require('../src/user');
 const Recipe = require('../src/recipe');
 const Pantry = require('../src/pantry');
 
-// const userData = require('../data/users');
 const recipeData = require('../data/recipes');
-// const ingredients = require('../data/ingredients')
 
 const singleUserData =
 {
