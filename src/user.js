@@ -17,12 +17,15 @@ class User {
 
 
 
-
+  filterMyRecipesByTag(array, tag){
+        let foundRecipe;
+        array.forEach(recipe=>{
+         recipe.tags.includes(tag) ? foundRecipe = recipe : null;
+      })
+      return foundRecipe
+  }
 
 }
-
-
-
 
 
 
