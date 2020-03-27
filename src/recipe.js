@@ -11,7 +11,8 @@ class Recipe {
     this.isFavorited = false;
   }
 
-  calculateCostOfIngredientsNeeded(){
+  calculateCostOfIngredientsforEachRecipe(){
+
   // takes all new ingredients that were needed to complete a recipe and calculates the total cost
   }
 
@@ -24,7 +25,9 @@ class Recipe {
               id: ingredient.id,
               amount: ingredient.quantity.amount,
               unit: ingredient.quantity.unit,
-              estimatedCostInCents: matchedIngredient.estimatedCostInCents
+              estimatedCostInCents: matchedIngredient.estimatedCostInCents,
+              totalCost:Number(((matchedIngredient.estimatedCostInCents*.01)*
+              ingredient.quantity.amount).toFixed(2))
             };
 
       })
