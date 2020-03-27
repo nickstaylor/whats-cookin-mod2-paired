@@ -1,11 +1,11 @@
-const Pantry = require('../src/pantry');
-let rawIngredientsData = require('../data/ingredients')
+// const Pantry = require('../src/pantry');
+let ingredientsData = require('../data/ingredients')
 
 class User {
-  constructor(user, rawIngredientsData) {
+  constructor(user, ingredientsData) {
     this.name = user.name;
     this.id = user.id;
-    this.pantry = new Pantry(user.pantry, rawIngredientsData);
+    this.pantry = new Pantry(user.pantry, ingredientsData);
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
@@ -37,7 +37,6 @@ class User {
 
 
 
-
-
-
-module.exports = User;
+if (typeof module !== 'undefined') {
+  module.exports = User;
+}
