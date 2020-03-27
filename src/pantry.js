@@ -7,6 +7,9 @@ class Pantry {
     this.ingredients = this.generateFullIngredientList(userIngredients);
   }
 
+
+
+
   generateFullIngredientList(partialIngredients) {
       return partialIngredients.map(ingredient => {
 
