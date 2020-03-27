@@ -4,6 +4,7 @@ const expect = chai.expect;
 const Recipe = require('../src/recipe');
 
 const recipeData = require('../data/recipes');
+let rawIngredientsData = require('../data/ingredients')
 
 describe('Recipe Class', function(){
   let singleRecipe;
@@ -30,8 +31,9 @@ describe('Recipe Class', function(){
     expect(recipe.image).to.eq(singleRecipe.image);
   });
 
-  it('should initialize with an array of ingredients', function(){
+  it.skip('should initialize with an array of ingredients', function(){
     expect(recipe.ingredients).to.deep.eq(singleRecipe.ingredients);
+    // console.log(singleRecipe.ingredients)
   });
 
   it('should initialize with an array of instructions', function(){
@@ -57,5 +59,101 @@ describe('Recipe Class', function(){
     expect(recipe.isFavorited).to.eq(false);
   });
 
+describe('Generate a full ingredients list method', function(){
+
+  it('should build a full ingredients list', function(){
+    console.log(recipe.ingredients)
+    expect(recipe.ingredients).to.deep.eq([
+  {
+    name: 'wheat flour',
+    id: 20081,
+    amount: 1.5,
+    unit: 'c',
+    estimatedCostInCents: 142,
+    totalCost: 2.13
+  },
+  {
+    name: 'bicarbonate of soda',
+    id: 18372,
+    amount: 0.5,
+    unit: 'tsp',
+    estimatedCostInCents: 582,
+    totalCost: 2.91
+  },
+  {
+    name: 'eggs',
+    id: 1123,
+    amount: 1,
+    unit: 'large',
+    estimatedCostInCents: 472,
+    totalCost: 4.72
+  },
+  {
+    name: 'sucrose',
+    id: 19335,
+    amount: 0.5,
+    unit: 'c',
+    estimatedCostInCents: 902,
+    totalCost: 4.51
+  },
+  {
+    name: 'instant vanilla pudding',
+    id: 19206,
+    amount: 3,
+    unit: 'Tbsp',
+    estimatedCostInCents: 660,
+    totalCost: 19.8
+  },
+  {
+    name: 'brown sugar',
+    id: 19334,
+    amount: 0.5,
+    unit: 'c',
+    estimatedCostInCents: 559,
+    totalCost: 2.79
+  },
+  {
+    name: 'salt',
+    id: 2047,
+    amount: 0.5,
+    unit: 'tsp',
+    estimatedCostInCents: 280,
+    totalCost: 1.4
+  },
+  {
+    name: 'fine sea salt',
+    id: 1012047,
+    amount: 24,
+    unit: 'servings',
+    estimatedCostInCents: 528,
+    totalCost: 126.72
+  },
+  {
+    name: 'semi sweet chips',
+    id: 10019903,
+    amount: 2,
+    unit: 'c',
+    estimatedCostInCents: 253,
+    totalCost: 5.06
+  },
+  {
+    name: 'unsalted butter',
+    id: 1145,
+    amount: 0.5,
+    unit: 'c',
+    estimatedCostInCents: 617,
+    totalCost: 3.08
+  },
+  {
+    name: 'vanilla',
+    id: 2050,
+    amount: 0.5,
+    unit: 'tsp',
+    estimatedCostInCents: 926,
+    totalCost: 4.63
+  }
+]);
+  })
+})
 
 });

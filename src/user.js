@@ -10,19 +10,29 @@ class User {
     this.recipesToCook = [];
   }
 
-
   addToMyFavoriteRecipes(recipe) {
     this.favoriteRecipes.push(recipe);
   }
 
+  removeFromMyFavoriteRecipes(recipe) {
+    let removedRecipe = this.favoriteRecipes.indexOf(recipe);
+    this.favoriteRecipes.splice(removedRecipe, 1);
+  }
+
+  addToRecipesToCook(recipe) {
+    this.recipesToCook.push(recipe);
+  }
 
 
-
+  filterMyRecipesByTag(userRecipes, tag){
+    let foundRecipe;
+    userRecipes.forEach(recipe=>{
+     recipe.tags.includes(tag) ? foundRecipe = recipe : null;
+   });
+   return foundRecipe;
+  }
 
 }
-
-
-
 
 
 
