@@ -1,5 +1,5 @@
 // const Pantry = require('../src/pantry');
-let ingredientsData = require('../data/ingredients')
+// let ingredientsData = require('../data/ingredients')
 
 class User {
   constructor(user, ingredientsData) {
@@ -9,6 +9,7 @@ class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
+
 
   addToMyFavoriteRecipes(recipe) {
     this.favoriteRecipes.push(recipe);
@@ -24,6 +25,7 @@ class User {
   }
 
 
+
   filterMyRecipesByTag(userRecipes, tag){
     let foundRecipe;
     userRecipes.forEach(recipe=>{
@@ -33,7 +35,6 @@ class User {
   }
 
 }
-
 
 
 
