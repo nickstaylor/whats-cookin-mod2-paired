@@ -27,6 +27,7 @@ nav{
   position: fixed;
   width: 100%;
   height: 100px;
+  /* margin-bottom: 20px; */
 }
 nav p{
   font-size: 1.4em;
@@ -157,4 +158,45 @@ transform: translateX(-3px);
     transform: rotateY(0deg) translateY(0) skewY(0deg);
     opacity: 1;
   }
+}
+
+.pop-up-recipe-container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 900px;
+  height: 600px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
+  border-radius: 10px;
+}
+
+.full-recipe-img{
+  text-align: center;
+  border-radius: 10px;
+  height: 200px;
+  width: 500px;
+}
+.ingred-instructions {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-size: 10px;
+}
+.ingredients-list {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.instructions-list {
+  border: 1px solid black;
+  height: 200px;
+  width: 400px;
+  margin: 10px
+}
+
+.hidden {
+  display: none;
 }
