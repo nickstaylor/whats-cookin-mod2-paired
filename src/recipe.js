@@ -1,3 +1,12 @@
+let rawIngredientsData;
+
+if(typeof module !== 'undefined') {
+  rawIngredientsData = require('../data/ingredients')
+} else {
+  rawIngredientsData = ingredientsData
+}
+
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -16,7 +25,7 @@ class Recipe {
 
   generateFullIngredientList(partialIngredients) {
     return partialIngredients.map(ingredient => {
-      let matchedIngredient = ingredientsData.find(rawIngredient =>{
+      let matchedIngredient = rawIngredientsData.find(rawIngredient =>{
       return ingredient.id === rawIngredient.id
       })
       return {name:matchedIngredient.name,
