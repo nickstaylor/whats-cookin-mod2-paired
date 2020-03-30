@@ -19,15 +19,33 @@ let eventHandler = (event)=>{
   let target = event.target.classList
   if (target.contains('view-recipe')){
     displayRecipeDetails()
-  } else
-  if (event.target.id ==='pantry-btn'){
+  } else if (event.target.id ==='pantry-btn'){
     displayUserPantry();
-  } else
-  if(target.contains("all-recipes-btn")) {
+  } else if(target.contains("all-recipes-btn")) {
     displayRecipes(recipeData);
+  } else if (event.target.classList.contains("add-recipe-to-favorite-btn")) {
+    addRecipeToFavorites(event);
+  } else if (event.target.id === 'favorites-btn') {
+    displayFavoriteRecipes()
   }
 }
 
+const displayFavoriteRecipes = () => {
+  mainSection.innerHTML = " ";
+  user.favoriteRecipes.forEach(recipe => {
+  mainSection.insertAdjacentHTML("afterbegin",`
+    <div class="recipe-container tilt-in-top-1">
+      <img class="recipe-image" src="${recipe.image}" alt="">
+      <h2>${recipe.name}</h2>
+      <div class="recipe-nav">
+        <button class="view-recipe" id="${recipe.id}-view" type="button" name="button">View Recipe</button>
+        <button class= "add-recipe-to-favorite-btn" id="${recipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
+        <button type="button" name="button">+/- Recipes to Cook</button>
+      </div>
+    </div>
+    `);
+  });
+}
 
 
 let displayUserPantry = () => {
@@ -53,9 +71,10 @@ let displayUserPantry = () => {
 
 
 let displayRecipeDetails = () => {
+  let idOfClickedRecipe = event.target.id.split("-")[0];
   mainSection.innerHTML = " ";
   let selectedRecipe = allRecipes.find(recipe=>{
-    return recipe.id === Number(event.target.id)
+    return recipe.id === Number(idOfClickedRecipe)
   })
   console.log(selectedRecipe)
   let instructionsDisplayed = '<ol>'
@@ -81,7 +100,7 @@ let displayRecipeDetails = () => {
   <div class="pop-up-recipe-container">
     <section class="pop-up-top">
       <h2>${selectedRecipe.name}</h2>
-      <button class="pop-up-fav-btn" type="button" name="button">+/- My Favorites</button>
+      <button class="add-recipe-to-favorite-btn" id="${selectedRecipe.id}-view" type="button" name="button">+/- My Favorites</button>
       <button type="button" name="cook-recipe">Cook Recipe</button>
     </section>
     <section class="ingred-image-box">
@@ -121,6 +140,7 @@ const addRecipeToFavorites = (event) => {
 }
 
 
+
 let displayRecipes = (recipeData) => {
 
   recipeData.forEach(recipe => {
@@ -131,8 +151,8 @@ let displayRecipes = (recipeData) => {
       <img class="recipe-image" src="${singleRecipe.image}" alt="">
       <h2>${singleRecipe.name}</h2>
       <div class="recipe-nav">
-        <button class="view-recipe" id="${singleRecipe.id}" type="button" name="button">View Recipe</button>
-        <button type="button" name="button">+/- My Favorites</button>
+        <button class="view-recipe" id="${singleRecipe.id}-view" type="button" name="button">View Recipe</button>
+        <button class="add-recipe-to-favorite-btn" id="${singleRecipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
         <button type="button" name="button">+/- Recipes to Cook</button>
       </div>
     </div>
