@@ -22,8 +22,13 @@ let eventHandler = (event)=>{
   } else
   if (event.target.id ==='pantry-btn'){
     displayUserPantry();
+  } else
+  if(target.contains("all-recipes-btn")) {
+    displayRecipes(recipeData);
   }
 }
+
+
 
 let displayUserPantry = () => {
   mainSection.innerHTML = " ";
@@ -99,6 +104,21 @@ let displayRecipeDetails = () => {
   </div>`)
 }
 
+const addRecipeToFavorites = (event) => {
+  let idOfClickedRecipe = event.target.id.split("-")[0];
+  let favoritedRecipe = allRecipes.find( recipe => {
+    return recipe.id === Number(idOfClickedRecipe);
+  })
+  let matchedRecipe = user.favoriteRecipes.find(favoriteRecipe => {
+    return favoriteRecipe.id === favoritedRecipe.id
+  })
+  if(matchedRecipe) {
+    user.removeFromMyFavoriteRecipes(matchedRecipe)
+  } else {
+      user.addToMyFavoriteRecipes(favoritedRecipe);
+      console.log(user.favoriteRecipes);
+    }
+}
 
 
 let displayRecipes = (recipeData) => {
