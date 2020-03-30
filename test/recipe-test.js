@@ -62,7 +62,6 @@ describe('Recipe Class', function(){
 describe('Generate a full ingredients list method', function(){
 
   it('should build a full ingredients list', function(){
-    console.log(recipe.ingredients)
     expect(recipe.ingredients).to.deep.eq([
   {
     name: 'wheat flour',
