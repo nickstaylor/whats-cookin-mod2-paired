@@ -1,11 +1,15 @@
-// const Pantry = require('../src/pantry');
+if(Pantry === undefined) {
+  Pantry = require('../src/pantry');
+}
+
+// let Pantry = require('../src/pantry');
 // let ingredientsData = require('../data/ingredients')
 
 class User {
-  constructor(user, ingredientsData) {
+  constructor(user) {
     this.name = user.name;
     this.id = user.id;
-    this.pantry = new Pantry(user.pantry, ingredientsData);
+    this.pantry = new Pantry(user.pantry);
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
