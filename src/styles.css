@@ -3,11 +3,13 @@
   cursor: default;
   margin: 0;
   padding: 0;
-  font-family: 'Lobster', cursive;
+  /* font-family: 'Lobster', cursive; */
   color: #1D9AF2;
+  letter-spacing: 0.02em;
 }
 
 body {
+  font-family: 'Lobster', cursive;
   display: grid;
   grid-template-areas:
     "nav"
@@ -17,7 +19,7 @@ body {
 
 }
 
-nav{
+nav {
   grid-area: nav;
   background-color: #292D3E;
   display: flex;
@@ -26,12 +28,27 @@ nav{
   position: fixed;
   width: 100%;
   height: 100px;
+  /* z-index: 10; */
 }
-nav p{
+nav p {
   font-size: 1.4em;
 }
-nav h1{
+nav h1 {
   font-size: 2.5em;
+}
+
+#pantry-btn:hover {
+text-decoration: underline;
+}
+
+
+.first-name,
+.user-money {
+  color: #ED664B;
+}
+
+.user-money {
+  font-size: 1.5em;
 }
 
 main {
@@ -50,9 +67,11 @@ main {
 .search-container input {
   width: 250px;
   font-size: 20px;
+  font-family: 'Lobster', cursive;
   border-radius: 0px 10px 10px 0px;
   padding: 5px;
   border: none;
+  outline: none;
 
 }
 
@@ -73,6 +92,8 @@ main {
 .search-button {
     border-radius: 10px 0px 0px 10px;
     border: none;
+
+
 }
 
 .mask{
@@ -80,9 +101,10 @@ main {
   width: 60px;
 }
 
-.recipe-container {
+.recipe-container,
+.ingredient-container {
   height: 350px;
-  width: 350px;
+  width: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -94,6 +116,29 @@ main {
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 }
+
+.ingredient-container {
+  height: 100px;
+  width: 250px;
+  font-family: arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: .8em;
+  padding: 10px;
+}
+
+.ingredient-span {
+  color: black;
+}
+.pantry-headline {
+  color: white;
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-family: arial, sans-serif;
+  font-size: 2.5em;
+}
+
+
 
 .recipe-container h2 {
   font-size: 1.5em;
@@ -121,11 +166,29 @@ main {
   border-radius: 4px;
   padding: 0 15px;
   cursor: pointer;
-  /* height:32px;
-  font-size:14px; */
   transition: all 0.2s ease-in-out;
 }
-.recipe-container button:hover {
+
+.pop-up-recipe-container button {
+  font-family: 'Lobster', cursive;
+  height: 40px;
+  width: 160px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: .9em;
+  color: #1D9AF2;
+  background-color: #292D3E;
+  border: 1px solid #1D9AF2;
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+
+
+.recipe-container button:hover,
+.pop-up-recipe-container button:hover {
 box-shadow: 1px 1px #53a7ea, 2px 2px #53a7ea, 3px 3px #53a7ea;
 transform: translateX(-3px);
 }
@@ -136,4 +199,129 @@ transform: translateX(-3px);
   height: 200px;
   width: 300px;
   border-radius: 10px;
+}
+
+
+.tilt-in-top-1 {
+  animation: tilt-in-top-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes tilt-in-top-1 {
+  0% {
+    transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0deg) translateY(0) skewY(0deg);
+    opacity: 1;
+  }
+}
+
+.pantry-container{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.pop-up-recipe-container {
+  margin-top: 60px;
+  font-family: arial, sans-serif;
+  display: grid;
+  grid-area:
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 70px auto 70px;
+  grid-template-areas:
+  "h h h"
+  "l r r"
+  "l f f";
+  width: 1000px;
+  height: 675px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
+  border-radius: 10px;
+}
+
+.pop-up-top {
+  grid-area: h;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Lobster', cursive;
+  font-size: 1.3em;
+}
+
+.pop-up-top h2 {
+  font-size: 2.0vw;
+}
+
+.pop-up-fav-btn {
+  font-size: .6em !important
+}
+
+.pop-up-recipe-bottom {
+  margin-top: -250px;
+  grid-area: f;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lobster', cursive;
+  font-size: 1.2em;
+}
+
+
+.full-recipe-img{
+  text-align: center;
+  border-radius: 10px;
+  height: 200px;
+  width: 300px;
+  margin-left: 15px;
+}
+
+.ingred-image-box {
+  grid-area: l
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ingred-image-box h3 {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+
+.ingredients-list {
+  grid-area: r
+  border: 1px solid black;
+  margin-top: 10px;
+  margin-left: 35px;
+  font-size: .8em;
+}
+
+.ingredients-list h3 {
+  margin-top: 20px;
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+.instructions-list {
+  margin-left: 50px;
+  font-size: 1em;
+  height: auto;
+  width: 600px;
+  margin-left: 50px;
+}
+
+.instructions-list h2 {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+
+.instructions-list ol li {
+  margin: 8px;
+}
+
+.hidden {
+  display: none;
 }

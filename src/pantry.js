@@ -1,19 +1,16 @@
 // let rawIngredientsData = ingredientsData !== undefined ? ingredientsData : require('../data/ingredients')
 
-let rawIngredientsData = require('../data/ingredients')
+// let rawIngredientsData = require('../data/ingredients')
 
 class Pantry {
   constructor(userIngredients) {
     this.ingredients = this.generateFullIngredientList(userIngredients);
   }
 
-
-
-
   generateFullIngredientList(partialIngredients) {
       return partialIngredients.map(ingredient => {
 
-      let matchedIngredient = rawIngredientsData.find(rawIngredient =>{
+      let matchedIngredient = ingredientsData.find(rawIngredient =>{
           return ingredient.ingredient === rawIngredient.id
         })
 
@@ -27,4 +24,6 @@ class Pantry {
 
 }
 
-module.exports = Pantry
+if (typeof module !== 'undefined') {
+  module.exports = Pantry;
+}
