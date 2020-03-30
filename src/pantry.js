@@ -1,6 +1,10 @@
-// let rawIngredientsData = ingredientsData !== undefined ? ingredientsData : require('../data/ingredients')
+let rawIngredientsDataPantry;
+if(typeof module !== 'undefined') {
+  rawIngredientsDataPantry = require('../data/ingredients')
+} else {
+  rawIngredientsDataPantry = ingredientsData
+}
 
-// let rawIngredientsData = require('../data/ingredients')
 
 class Pantry {
   constructor(userIngredients) {

@@ -37,7 +37,9 @@ nav h1 {
   font-size: 2.5em;
 }
 
-#pantry-btn:hover {
+#pantry-btn:hover,
+.all-recipes-btn:hover,
+#favorites-btn:hover {
 text-decoration: underline;
 }
 
