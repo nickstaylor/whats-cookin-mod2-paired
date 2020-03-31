@@ -62,7 +62,6 @@ describe('Recipe Class', function(){
 describe('Generate a full ingredients list method', function(){
 
   it('should build a full ingredients list', function(){
-    console.log(recipe.ingredients)
     expect(recipe.ingredients).to.deep.eq([
   {
     name: 'wheat flour',
@@ -155,5 +154,19 @@ describe('Generate a full ingredients list method', function(){
 ]);
   })
 })
+
+describe('changeFavoriteStatus Method', function(){
+
+  it('should toggle favorite status', function(){
+    expect(recipe.isFavorited).to.eq(false)
+    recipe.changeFavoriteStatus()
+    expect(recipe.isFavorited).to.eq(true)
+    recipe.changeFavoriteStatus()
+    expect(recipe.isFavorited).to.eq(false)
+  });
+
+});
+
+
 
 });
