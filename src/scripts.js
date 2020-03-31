@@ -27,8 +27,57 @@ let eventHandler = (event)=>{
     addRecipeToFavorites(event);
   } else if (event.target.id === 'favorites-btn') {
     displayFavoriteRecipes()
+  } else if (target.contains('cook-recipe')) {
+    checkPantryIngredients()
   }
 }
+
+const checkPantryIngredients = () => {
+  let checkPantrySection = document.querySelector('.pop-up-recipe-bottom');
+  checkPantrySection.innerHTML = "";
+  let missingIngredients = [];
+  let partialIngredients = [];
+  let idOfClickedRecipe = event.target.id.split("-")[0];
+  let selectedRecipe = allRecipes.find(recipe=>{
+    return recipe.id === Number(idOfClickedRecipe)
+  })
+  console.log('UserPantry:' + user.pantry.ingredients.length)
+  console.log('RecipeIngredients:' + selectedRecipe.ingredients.length);
+  console.log(user.pantry.ingredients)
+  console.log(selectedRecipe.ingredients);
+
+
+  if (selectedRecipe.ingredients.length > user.pantry.ingredients.length){
+  let unique = selectedRecipe.ingredients.forEach(recipe=>{
+   user.pantry.ingredients.forEach(ingredient=>{
+    if (ingredient.id == recipe.id){
+      console.log(ingredient.id)
+      console.log(recipe.id)
+      const value = selectedRecipe.ingredients.indexOf(recipe)
+      selectedRecipe.ingredients.splice(value, 1)
+      }
+    })
+  })} else {
+      let unique = user.pantry.ingredients.forEach(ingredient=>{
+      selectedRecipe.ingredients.forEach(recipe=>{
+      if (ingredient.id == recipe.id){
+      console.log(ingredient.id)
+      console.log(recipe.id)
+      const value = selectedRecipe.ingredients.indexOf(recipe)
+      selectedRecipe.ingredients.splice(value, 1)
+      }
+    })
+  })}
+missingIngredients.push.apply(missingIngredients,selectedRecipe.ingredients)
+console.log(missingIngredients)
+
+}
+
+
+
+
+
+
 
 const displayFavoriteRecipes = () => {
   mainSection.innerHTML = " ";
@@ -93,15 +142,13 @@ let displayRecipeDetails = () => {
     '. Total cost: $' + ingredient.totalCost + '</li>'
   });
   ingredientsDisplayed = ingredientsDisplayed + '</ul>';
-  console.log(recipeTotalCost)
-  console.log(ingredientsDisplayed);
+  console.log(Number(recipeTotalCost.toFixed(2)))
 
   mainSection.insertAdjacentHTML("afterbegin", `
   <div class="pop-up-recipe-container">
     <section class="pop-up-top">
       <h2>${selectedRecipe.name}</h2>
-      <button class="add-recipe-to-favorite-btn" id="${selectedRecipe.id}-view" type="button" name="button">+/- My Favorites</button>
-      <button type="button" name="cook-recipe">Cook Recipe</button>
+      <button class="pop-up-fav-btn add-recipe-to-favorite-btn" id="${selectedRecipe.id}-view" type="button" name="button">+/- My Favorites</button>
     </section>
     <section class="ingred-image-box">
       <img class ="full-recipe-img" src="${selectedRecipe.image}"
@@ -118,9 +165,10 @@ let displayRecipeDetails = () => {
     </section>
     <section class ="pop-up-recipe-bottom">
       <h4>Does your pantry have all the ingredients?</h4>
-      <button class="check pantry" type="button" name="check-pantry">Check My Pantry</button>
+      <button class="cook-recipe" id="${selectedRecipe.id}-view" type="button" name="check-pantry">Cook Recipe!</button>
     </section>
   </div>`)
+  return selectedRecipe
 }
 
 const addRecipeToFavorites = (event) => {
@@ -142,7 +190,7 @@ const addRecipeToFavorites = (event) => {
 
 
 let displayRecipes = (recipeData) => {
-
+  mainSection.innerHTML = " "
   recipeData.forEach(recipe => {
       let singleRecipe = new Recipe(recipe)
       allRecipes.push(singleRecipe);
