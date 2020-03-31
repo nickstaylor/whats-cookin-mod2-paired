@@ -1,9 +1,11 @@
 let mainSection = document.querySelector('.main-recipe-card-container')
 let searchBox = document.querySelector('.search-input')
 var bodyContainer = document.querySelector('body');
+let favoriteBtn = document.querySelector("add-recipe-to-favorite-btn");
 let allRecipes = [];
 let randomNumber = ((Math.ceil(Math.random() * 49)));
 const user = new User(usersData[randomNumber], ingredientsData)
+
 let userName = document.querySelector('.user-name')
 console.log(user);
 
@@ -22,17 +24,28 @@ let eventHandler = (event)=>{
   } else if (event.target.id ==='pantry-btn'){
     displayUserPantry();
   } else if(target.contains("all-recipes-btn")) {
-    displayRecipes(recipeData);
+    displayRecipes(allRecipes);
   } else if (event.target.classList.contains("add-recipe-to-favorite-btn")) {
+    changeBtnColor(event)
     addRecipeToFavorites(event);
   } else if (event.target.id === 'favorites-btn') {
     displayFavoriteRecipes()
   }
 }
 
+
+const changeBtnColor = (event) => {
+  if(event.target.style.color !== "green") {
+    event.target.style.color = "green"
+  } else {
+    event.target.style.color = "#1D9AF2"
+  }
+}
+
 const displayFavoriteRecipes = () => {
   mainSection.innerHTML = " ";
   user.favoriteRecipes.forEach(recipe => {
+    if(recipe.isFavorited === true) {
   mainSection.insertAdjacentHTML("afterbegin",`
     <div class="recipe-container tilt-in-top-1">
       <img class="recipe-image" src="${recipe.image}" alt="">
@@ -44,6 +57,9 @@ const displayFavoriteRecipes = () => {
       </div>
     </div>
     `);
+    }
+    let favoriteBtn = document.querySelector('.add-recipe-to-favorite-btn')
+    favoriteBtn.style.color = "green";
   });
 }
 
@@ -123,6 +139,8 @@ let displayRecipeDetails = () => {
   </div>`)
 }
 
+
+
 const addRecipeToFavorites = (event) => {
   let idOfClickedRecipe = event.target.id.split("-")[0];
   let favoritedRecipe = allRecipes.find( recipe => {
@@ -133,32 +151,74 @@ const addRecipeToFavorites = (event) => {
   })
   if(matchedRecipe) {
     user.removeFromMyFavoriteRecipes(matchedRecipe)
+    matchedRecipe.changeFavoriteStatus();
+    console.log(user.favoriteRecipes);
   } else {
+      favoritedRecipe.changeFavoriteStatus();
+      updateRecepiesArray(favoritedRecipe)
       user.addToMyFavoriteRecipes(favoritedRecipe);
-      console.log(user.favoriteRecipes);
+      // console.log(favoritedRecipe);
     }
 }
 
+const updateRecepiesArray = (favoritedRecipe) => {
+    let matchedRecipe = allRecipes.find(recipe => {
+     return recipe.id === favoritedRecipe.id
+    })
+    console.log("Favorited Recepie",favoritedRecipe);
+    console.log(allRecipes);
+    let value = allRecipes.indexOf(matchedRecipe)
+    allRecipes[value] = favoritedRecipe;
+    // console.log(value);
+    // allRecipes.splice(value, 1, favoritedRecipe)
+    // console.log(value);
+    // console.log(favoritedRecipe);
+    // console.log(allRecipes);
+}
 
 
-let displayRecipes = (recipeData) => {
-
+const fillUpRecipeArray = (recipeData) => {
   recipeData.forEach(recipe => {
-      let singleRecipe = new Recipe(recipe)
-      allRecipes.push(singleRecipe);
-    mainSection.insertAdjacentHTML("afterbegin",`
-    <div class="recipe-container tilt-in-top-1">
-      <img class="recipe-image" src="${singleRecipe.image}" alt="">
-      <h2>${singleRecipe.name}</h2>
-      <div class="recipe-nav">
-        <button class="view-recipe" id="${singleRecipe.id}-view" type="button" name="button">View Recipe</button>
-        <button class="add-recipe-to-favorite-btn" id="${singleRecipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
-        <button type="button" name="button">+/- Recipes to Cook</button>
-      </div>
-    </div>
-    `);
+    let singleRecipe = new Recipe(recipe)
+    allRecipes.push(singleRecipe);
   });
 }
+
+let displayRecipes = (allRecipes) => {
+  mainSection.innerHTML = " ";
+  allRecipes.forEach(recipe => {
+    // debugger
+    if(recipe.isFavorited === true) {
+        mainSection.insertAdjacentHTML("afterbegin",`
+        <div class="recipe-container tilt-in-top-1">
+          <img class="recipe-image" src="${recipe.image}" alt="">
+          <h2>${recipe.name}</h2>
+          <div class="recipe-nav">
+            <button class="view-recipe" id="${recipe.id}-view" type="button" name="button">View Recipe</button>
+            <button class="add-recipe-to-favorite-btn" id="${recipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
+            <button type="button" name="button">+/- Recipes to Cook</button>
+          </div>
+        </div>
+        `);
+      let favoriteBtn = document.querySelector('.add-recipe-to-favorite-btn')
+      favoriteBtn.style.color = "green";
+    } else {
+      mainSection.insertAdjacentHTML("afterbegin",`
+      <div class="recipe-container tilt-in-top-1">
+        <img class="recipe-image" src="${recipe.image}" alt="">
+        <h2>${recipe.name}</h2>
+        <div class="recipe-nav">
+          <button class="view-recipe" id="${recipe.id}-view" type="button" name="button">View Recipe</button>
+          <button class="add-recipe-to-favorite-btn" id="${recipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
+          <button type="button" name="button">+/- Recipes to Cook</button>
+        </div>
+      </div>
+      `);
+    }
+  });
+}
+
+
 
  const executeSearch = () => {
    let filter = searchBox.value.toUpperCase();
@@ -181,4 +241,5 @@ bodyContainer.addEventListener('click', eventHandler);
 searchBox.addEventListener("keyup", executeSearch);
 
 welcomeTheUser();
-displayRecipes(recipeData);
+fillUpRecipeArray(recipeData)
+displayRecipes(allRecipes);
