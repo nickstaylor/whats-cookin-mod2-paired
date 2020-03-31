@@ -1,3 +1,7 @@
+if(typeof module !== 'undefined') {
+  Pantry = require('../src/pantry')
+}
+
 // const Pantry = require('../src/pantry');
 // let ingredientsData = require('../data/ingredients')
 
