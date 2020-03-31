@@ -248,7 +248,7 @@ transform: translateX(-3px);
   grid-area: h;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   font-family: 'Lobster', cursive;
   font-size: 1.3em;
@@ -256,14 +256,16 @@ transform: translateX(-3px);
 
 .pop-up-top h2 {
   font-size: 2.0vw;
+  margin-left: 50px;
 }
 
 .pop-up-fav-btn {
-  font-size: .6em !important
+  font-size: .7em !important;
+  margin-right: 50px !important;
 }
 
 .pop-up-recipe-bottom {
-  margin-top: -250px;
+  margin-top: -350px;
   grid-area: f;
   display: flex;
   flex-direction: row;
@@ -271,6 +273,7 @@ transform: translateX(-3px);
   align-items: center;
   font-family: 'Lobster', cursive;
   font-size: 1.2em;
+  border: 1px solid black;
 }
 
 
