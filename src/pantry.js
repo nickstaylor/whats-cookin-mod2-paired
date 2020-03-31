@@ -14,7 +14,7 @@ class Pantry {
   generateFullIngredientList(partialIngredients) {
       return partialIngredients.map(ingredient => {
 
-      let matchedIngredient = ingredientsData.find(rawIngredient =>{
+      let matchedIngredient = rawIngredientsDataPantry.find(rawIngredient =>{
           return ingredient.ingredient === rawIngredient.id
         })
 
