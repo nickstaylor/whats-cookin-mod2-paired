@@ -58,28 +58,16 @@ const findUniqueIngredients = (recipeIngredients, userIngredients ) => {
 }
 
 const compareLikeIngredients = (recipeIngredients, userIngredients) => {
-  if (recipeIngredients.length > userIngredients.length){
-      recipeIngredients.forEach(recipeIngredient => {
-      userIngredients.forEach(userIngredient => {
-        if (userIngredient.id == recipeIngredient.id){
-        console.log(userIngredient.id)
-        console.log(recipeIngredient.id)
-        const value = recipeIngredients.indexOf(recipeIngredient)
-        recipeIngredients.splice(value, 1)
-        }
+    recipeIngredients.forEach(recipeIngredient => {
+    userIngredients.forEach(userIngredient => {
+      if (userIngredient.id == recipeIngredient.id){
+      console.log(userIngredient.id)
+      console.log(recipeIngredient.id)
+      const value = recipeIngredients.indexOf(recipeIngredient)
+      recipeIngredients.splice(value, 1)
+      }
     })
-  })} else {
-      userIngredients.forEach(userIngredient => {
-      recipeIngredients.forEach(recipeIngredient => {
-        if (userIngredient.id == recipeIngredient.id){
-        console.log(userIngredient.id)
-        console.log(recipeIngredient.id)
-        const value = recipeIngredients.indexOf(recipeIngredient)
-        recipeIngredients.splice(value, 1)
-        }
-      })
-    })
-  }
+  })
   return recipeIngredients
 }
 
@@ -101,8 +89,7 @@ const checkPantryIngredients = () => {
 
   findUniqueIngredients(recipeIngredients, userIngredients)
   compareLikeIngredients(recipeIngredients, userIngredients)
-  missingIngredients.push.apply(missingIngredients,recipeIngredients)
-  console.log(missingIngredients)
+  missingIngredients = [...missingIngredients, ...recipeIngredients]
   displayPantryRecipeInfo(missingIngredients, partialIngredients, selectedRecipe)
 }
 
@@ -126,9 +113,10 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
       neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
        Number(((ingredient.estimatedCostInCents*.01)*
        ingredient.amount).toFixed(2)) + '</li>';
-
+       console.log(totalCost)
     });
     partialIngredients.forEach(ingredient=>{
+      console.log(totalCost)
       totalCost += ingredient.totalCost
       neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
       ingredient.totalCost + '</li>'
@@ -137,7 +125,7 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
     console.log(neededIngredients)
     console.log(totalCost);
 
-
+    userMoney = Number(userMoney.toFixed(2));
     costSection.insertAdjacentHTML("afterbegin", `
     <section class ="cost-list">
     <h2>Great! You only need a few things:</h2>
@@ -185,14 +173,16 @@ const unhideInstructions = () => {
     type="button" name="cook-recipe">Cook Recipe!</button>
     `)
   } else {
-    let moneyBalance = userMoney - totalCost
+    let moneyBalance = Number(userMoney.toFixed(2)) - Number(totalCost.toFixed(2))
+    moneyBalance = Number(moneyBalance.toFixed(2));
     checkPantrySection.insertAdjacentHTML("afterbegin", `
-    <h2>You have <span class="user-money">$${Number(moneyBalance.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> remaining in your account.  Let's Cook!</h2>
+    <h2>You have <span class="user-money">$${moneyBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> remaining in your account.  Let's Cook!</h2>
     `)
 
   }
   seeInstructionsAgain = false;
   userMoney = userMoney - totalCost;
+  totalCost = 0
 }
 
 
@@ -221,7 +211,7 @@ let displayUserPantry = () => {
   mainSection.insertAdjacentHTML("afterbegin", `
   <h1 class="pantry-headline">Hi <span class="first-name">${userFirstName}!</span>
     You have <span class="user-money">
-    $${userMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> to
+    $${Number(userMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").toFixed(2))}</span> to
     buy more groceries. Cook it up!</h1>`)
 
   user.pantry.ingredients.forEach(ingredient => {
