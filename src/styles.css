@@ -173,7 +173,7 @@ main {
 
 .pop-up-recipe-container button {
   font-family: 'Lobster', cursive;
-  height: 40px;
+  height: 46px;
   width: 160px;
   margin-left: 10px;
   margin-right: 10px;
@@ -265,11 +265,12 @@ transform: translateX(-3px);
 }
 
 .pop-up-recipe-bottom {
-  margin-top: -350px;
+  margin-top: -270px;
+  margin-left: 30px;
   grid-area: f;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-family: 'Lobster', cursive;
   font-size: 1.2em;
@@ -310,22 +311,49 @@ transform: translateX(-3px);
   font-family: 'Lobster', cursive;
   text-align: center;
 }
-.instructions-list {
+
+.instructions-list,
+.cost-list {
   margin-left: 50px;
-  font-size: 1em;
+  font-size: .8em;
   height: auto;
   width: 600px;
   margin-left: 50px;
 }
 
-.instructions-list h2 {
+.cost-list{
+  font-size: 1em;
+}
+
+.cost-list ol {
+  padding-top: 15px;
+  column-count: 2;
+  margin-right: 20px;
+}
+
+.cost-list ol li {
+  display: inline-block;
+  width: 100%;
+  font-size: 1.2em;
+}
+
+.instructions-list h2,
+.cost-list h2 {
   font-family: 'Lobster', cursive;
   text-align: center;
 }
 
-.instructions-list ol li {
+.cost-list h2 {
+  text-align: left;
+  font-size: 1.5em;
+
+}
+
+.instructions-list ol li,
+.cost-list ol li{
   margin: 8px;
 }
+
 
 .hidden {
   display: none;
