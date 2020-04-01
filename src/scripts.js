@@ -361,7 +361,6 @@ let displayRecipes = (recipesArry) => {
   });
 };
 
-
 const executeSearch = () => {
   let filter = searchBox.value.toUpperCase();
   let recipeName = [...document.getElementsByTagName('h2')]
@@ -373,7 +372,6 @@ const executeSearch = () => {
     }
   });
 };
-
 
 bodyContainer.addEventListener('click', eventHandler);
 searchBox.addEventListener("keyup", executeSearch);
