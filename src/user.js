@@ -2,9 +2,6 @@ if(typeof module !== 'undefined') {
   Pantry = require('../src/pantry')
 }
 
-// const Pantry = require('../src/pantry');
-// let ingredientsData = require('../data/ingredients')
-
 class User {
   constructor(user, ingredientsData) {
     this.name = user.name;
@@ -30,14 +27,11 @@ class User {
 
 
 
-  filterMyRecipesByTag(userRecipes, tag){
-    let foundRecipe;
-    userRecipes.forEach(recipe=>{
-     recipe.tags.includes(tag) ? foundRecipe = recipe : null;
-   });
-   return foundRecipe;
+  filterMyRecipesByTag(userRecipes, tag) {
+    return userRecipes.filter(recipe => {
+      return recipe.tags.includes(tag)
+    })
   }
-
 }
 
 
