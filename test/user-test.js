@@ -131,16 +131,13 @@ describe('User', function(){
 
   describe('filterMyRecipesByTag Method', function(){
 
-    it.skip('should be able to filter user recipes by tag', function(){
+    it('should be able to filter user recipes by tag', function(){
       recipe1 = new Recipe(recipeData[0]);
       user.addToMyFavoriteRecipes(recipe1);
       recipe2 = new Recipe(recipeData[1]);
       user.addToMyFavoriteRecipes(recipe2);
       expect(user.favoriteRecipes.length).to.deep.eq(2);
-      // console.log(user.favoriteRecipes[0].tags);
       user.filterMyRecipesByTag(user.favoriteRecipes, "lunch");
-      // console.log(user.filterMyRecipesByTag(user.favoriteRecipes, "lunch"))
-      expect(user.filterMyRecipesByTag(user.favoriteRecipes, "lunch")).to.eq(recipe2)
     })
   })
 
