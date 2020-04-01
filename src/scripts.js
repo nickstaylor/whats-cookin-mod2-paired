@@ -2,9 +2,9 @@ let mainSection = document.querySelector('.main-recipe-card-container')
 let searchBox = document.querySelector('.search-input')
 var bodyContainer = document.querySelector('body');
 let allRecipes = [];
-let userMoney = 1000
+let userMoney = 10000
+let totalCost = 0;
 let seeInstructionsAgain = false;
-// let purchaseItemsToCook = false;
 let randomNumber = ((Math.ceil(Math.random() * 49)));
 const user = new User(usersData[randomNumber], ingredientsData)
 let userName = document.querySelector('.user-name')
@@ -36,9 +36,51 @@ let eventHandler = (event)=>{
     seeInstructionsAgain = true
     unhideInstructions();
   } else if (target.contains('purchase-items')){
-    // seeInstructionsAgain = false
     unhideInstructions()
+  } else if (target.contains('close-recipe')){
+    displayRecipes(recipeData);
   }
+}
+
+
+const findUniqueIngredients = (recipeIngredients, userIngredients ) => {
+  return recipeIngredients.reduce((partialIngredients, recipeIngredient) => {
+    userIngredients.forEach(userIngredient => {
+    if (userIngredient.id === recipeIngredient.id && userIngredient.amount < recipeIngredient.amount){
+      partialIngredients.push({id: userIngredient.id,
+      name: userIngredient.name,
+      amountNeeded: recipeIngredient.amount - userIngredient.amount,
+      totalCost: (recipeIngredient.estimatedCostInCents * (recipeIngredient.amount - userIngredient.amount)) * .01})
+      }
+    })
+    return partialIngredients
+  } , [])
+}
+
+const compareLikeIngredients = (recipeIngredients, userIngredients) => {
+  if (recipeIngredients.length > userIngredients.length){
+      recipeIngredients.forEach(recipeIngredient => {
+      userIngredients.forEach(userIngredient => {
+        if (userIngredient.id == recipeIngredient.id){
+        console.log(userIngredient.id)
+        console.log(recipeIngredient.id)
+        const value = recipeIngredients.indexOf(recipeIngredient)
+        recipeIngredients.splice(value, 1)
+        }
+    })
+  })} else {
+      userIngredients.forEach(userIngredient => {
+      recipeIngredients.forEach(recipeIngredient => {
+        if (userIngredient.id == recipeIngredient.id){
+        console.log(userIngredient.id)
+        console.log(recipeIngredient.id)
+        const value = recipeIngredients.indexOf(recipeIngredient)
+        recipeIngredients.splice(value, 1)
+        }
+      })
+    })
+  }
+  return recipeIngredients
 }
 
 const checkPantryIngredients = () => {
@@ -54,49 +96,13 @@ const checkPantryIngredients = () => {
   console.log('RecipeIngredients:' + selectedRecipe.ingredients.length);
   console.log(selectedRecipe.ingredients);
 
-  //make this its own function
-  // compareLikeIngredients(selectedRecipe.ingredients)
+  let recipeIngredients = selectedRecipe.ingredients;
+  let userIngredients = user.pantry.ingredients
 
-  selectedRecipe.ingredients.forEach(recipe=>{
-    user.pantry.ingredients.forEach(user=>{
-      if (user.id === recipe.id && user.amount < recipe.amount) {
-        console.log(user.name + " userAmount: "+ user.amount)
-        console.log(recipe.name + " recipeAmount: "+ recipe.amount)
-        partialIngredients.push({id: user.id,
-        name: user.name,
-        amountNeeded: recipe.amount - user.amount,
-        totalCost: (recipe.estimatedCostInCents * (recipe.amount - user.amount)) * .01})
-      }
-    })
-  })
-
-
-  ///functionCompareLikeIngredients(array1, array2)
-  let userPantry = user.pantry.ingredients
-  let recipePantry = selectedRecipe.ingredients
-  if (selectedRecipe.ingredients.length > user.pantry.ingredients.length){
-      selectedRecipe.ingredients.forEach(recipe=>{
-      user.pantry.ingredients.forEach(ingredient=>{
-        if (ingredient.id == recipe.id){
-      console.log(ingredient.id)
-      console.log(recipe.id)
-        const value = selectedRecipe.ingredients.indexOf(recipe)
-        selectedRecipe.ingredients.splice(value, 1)
-        }
-    })
-  })} else {
-      user.pantry.ingredients.forEach(ingredient=>{
-      selectedRecipe.ingredients.forEach(recipe=>{
-        if (ingredient.id == recipe.id){
-      console.log(ingredient.id)
-      console.log(recipe.id)
-        const value = selectedRecipe.ingredients.indexOf(recipe)
-        selectedRecipe.ingredients.splice(value, 1)
-        }
-      })
-    })
-  }
-  missingIngredients.push.apply(missingIngredients,selectedRecipe.ingredients)
+  findUniqueIngredients(recipeIngredients, userIngredients)
+  compareLikeIngredients(recipeIngredients, userIngredients)
+  missingIngredients.push.apply(missingIngredients,recipeIngredients)
+  console.log(missingIngredients)
   displayPantryRecipeInfo(missingIngredients, partialIngredients, selectedRecipe)
 }
 
@@ -106,28 +112,37 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
   let checkPantrySection = document.querySelector('.pop-up-recipe-bottom');
   checkPantrySection.innerHTML = "";
   let costSection = document.querySelector('.instructions-list');
-  costSection.innerHTML = "";
+
 
   if (missingIngredients.length === 0 && partialIngredients.length === 0){
-
     checkPantrySection.insertAdjacentHTML("afterbegin", `
     <h4>You have all of the ingredients! Enjoy Cooking!</h4> `)
   } else {
-
+    costSection.innerHTML = "";
     let neededIngredients = '<ol>'
     missingIngredients.forEach(ingredient=>{
+      totalCost += Number(((ingredient.estimatedCostInCents*.01)*
+      ingredient.amount).toFixed(2))
       neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
        Number(((ingredient.estimatedCostInCents*.01)*
-       ingredient.amount).toFixed(2)) + '</li>'
+       ingredient.amount).toFixed(2)) + '</li>';
+
     });
-    neededIngredients = neededIngredients + '</ol>';
+    partialIngredients.forEach(ingredient=>{
+      totalCost += ingredient.totalCost
+      neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
+      ingredient.totalCost + '</li>'
+      neededIngredients = neededIngredients + '</ol>';
+    });
     console.log(neededIngredients)
+    console.log(totalCost);
 
 
     costSection.insertAdjacentHTML("afterbegin", `
     <section class ="cost-list">
     <h2>Great! You only need a few things:</h2>
      ${neededIngredients}
+     <h2><b>Total Cost</b>: ${Number(totalCost.toFixed(2))}</h2>
       </section>`)
       checkPantrySection.insertAdjacentHTML("afterbegin", `
         <h4>You have $${userMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} to purchase.</h4>
@@ -142,7 +157,6 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
 }
 
 const unhideInstructions = () => {
-
   let costSection = document.querySelector('.instructions-list')
   costSection.innerHTML = ""
   let checkPantrySection = document.querySelector('.pop-up-recipe-bottom')
@@ -168,14 +182,17 @@ const unhideInstructions = () => {
     checkPantrySection.insertAdjacentHTML("afterbegin", `
     <h4>Does your pantry have all the ingredients?</h4>
     <button class="cook-recipe" id="${selectedRecipe.id}-view"
-    type="button" name="cook-recipce">Cook Recipe!</button>
+    type="button" name="cook-recipe">Cook Recipe!</button>
     `)
-  } else { //enter in cost amount here and enjoy cokking message
+  } else {
+    let moneyBalance = userMoney - totalCost
     checkPantrySection.insertAdjacentHTML("afterbegin", `
-    <h4>Let's Cook!</h4>
+    <h2>You have <span class="user-money">$${Number(moneyBalance.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> remaining in your account.  Let's Cook!</h2>
     `)
+
   }
   seeInstructionsAgain = false;
+  userMoney = userMoney - totalCost;
 }
 
 
@@ -189,7 +206,6 @@ const displayFavoriteRecipes = () => {
       <div class="recipe-nav">
         <button class="view-recipe" id="${recipe.id}-view" type="button" name="button">View Recipe</button>
         <button class= "add-recipe-to-favorite-btn" id="${recipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
-        <button type="button" name="button">+/- Recipes to Cook</button>
       </div>
     </div>
     `);
@@ -198,6 +214,7 @@ const displayFavoriteRecipes = () => {
 
 
 let displayUserPantry = () => {
+  console.log(userMoney)
   mainSection.innerHTML = " ";
   let userFullName = `${user.name}`
   let userFirstName = userFullName.split(" ").shift();
@@ -238,7 +255,7 @@ let displayRecipeDetails = () => {
     recipeTotalCost += ingredient.totalCost
     ingredientsDisplayed = ingredientsDisplayed + '<li class="pop-up-ingredients">' +
     Number(ingredient.amount.toFixed(2)) + ingredient.unit + ' ' + ingredient.name +
-    '. Total cost: $' + ingredient.totalCost + '</li>'
+    '. <b>Total cost</b>: $' + ingredient.totalCost + '</li>'
   });
   ingredientsDisplayed = ingredientsDisplayed + '</ul>';
   console.log(Number(recipeTotalCost.toFixed(2)))
@@ -248,6 +265,7 @@ let displayRecipeDetails = () => {
     <section class="pop-up-top">
       <h2>${selectedRecipe.name}</h2>
       <button class="pop-up-fav-btn add-recipe-to-favorite-btn" id="${selectedRecipe.id}-view" type="button" name="button">+/- My Favorites</button>
+      <button class="close-recipe" id="${selectedRecipe.id}-view" type="button" name="close-recipe">Close Recipe</button>
     </section>
     <section class="ingred-image-box">
       <img class ="full-recipe-img" src="${selectedRecipe.image}"
@@ -266,9 +284,7 @@ let displayRecipeDetails = () => {
       <h4>Does your pantry have all the ingredients?</h4>
       <button class="cook-recipe" id="${selectedRecipe.id}-view" type="button" name="cook-recipce">Cook Recipe!</button>
     </section>
-
   </div>`)
-  return selectedRecipe
 }
 
 const addRecipeToFavorites = (event) => {
@@ -301,7 +317,6 @@ let displayRecipes = (recipeData) => {
       <div class="recipe-nav">
         <button class="view-recipe" id="${singleRecipe.id}-view" type="button" name="button">View Recipe</button>
         <button class="add-recipe-to-favorite-btn" id="${singleRecipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
-        <button type="button" name="button">+/- Recipes to Cook</button>
       </div>
     </div>
     `);
