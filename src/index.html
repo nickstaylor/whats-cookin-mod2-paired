@@ -1,36 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
 
-    <title>What's Cookin?</title>
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
-    <link href="styles.css" type="text/css" rel="stylesheet">
-  </head>
-  <body>
-    <nav>
+<head>
+  <meta charset="UTF-8">
+
+  <title>Whats Cookin?</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+  <link href="styles.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="hidden" id="nav-bar">
+    <div class="pantry-favories-container">
       <p id="pantry-btn">My Pantry</p>
-      <img class="mask" src ="../images/mask.png" alt="face icon"/>
-      <h1 class="user-name"></h1>
       <p id="favorites-btn">My Favorites</p>
-      <p class ="all-recipes-btn" id="recipe-btn">All Recipes</p>
-      <div class="search-container">
-      <button type="submit-button" class="search-button">
-          <img src="../images/search.svg" alt="search-button"
-           class="search-icon">
-       </button>
-    <input placeholder="search recipes here.." text="text" class="search-input">
     </div>
-    </nav>
-    <main class="main-recipe-card-container">
-    </main>
+    <img class="mask" src="../images/mask.png" alt="face icon" />
+    <h1 class="user-name"></h1>
+    <label for="cars">Select by tag:</label>
+    <select id="tags" onchange="searchByTag()">
+      <option value="antipasti">Antipasti</option>
+      <option value="starter">Starter</option>
+      <option value="snack">Snack</option>
+      <option value="appetizer">Appetizer</option>
+      <option value="antipasto">Antipasto</option>
+      <option value="hor d'oeuvr">Hor d'oeuvr</option>
+      <option value="main course">Main course</option>
+      <option value="main dish">Main dish</option>
+      <option value="dinner">Dinner</option>
+      <option value="sauce">Sauce</option>
+      <option value="side dish">Side dish</option>
+      <option value="lunch">Lunch</option>
+    </select>
+    <p class="all-recipes-btn" id="recipe-btn">All Recipes</p>
+    <div class="search-container">
+      <button type="submit-button" class="search-button">
+        <img src="../images/search.svg" alt="search-button" class="search-icon">
+      </button>
+      <input placeholder="search recipes here.." text="text" class="search-input">
+    </div>
+  </nav>
+  
+  <main class="main-recipe-card-container">
+    <section class="welcome-banner">
+      <h1>Welcome to Cooking with COVID</h1>
+      <h2>Your Friendly Virus</h2>
+      <button class="enter-btn" id="enter">Glove-Up And Enter</button>
+    </section>
+  </main>
 
-    <script type="text/javascript" src="../data/users.js"></script>
-    <script type="text/javascript" src="../data/recipes.js"></script>
-    <script type="text/javascript" src="../data/ingredients.js"></script>
-    <script type="text/javascript" src ="./pantry.js"></script>
-    <script type="text/javascript" src ="./recipe.js"></script>
-    <script type="text/javascript" src= "./user.js"></script>
-    <script type="text/javascript" src="./scripts.js"></script>
-  </body>
+  <script type="text/javascript" src="../data/users.js"></script>
+  <script type="text/javascript" src="../data/recipes.js"></script>
+  <script type="text/javascript" src="../data/ingredients.js"></script>
+  <script type="text/javascript" src="./pantry.js"></script>
+  <script type="text/javascript" src="./recipe.js"></script>
+  <script type="text/javascript" src="./user.js"></script>
+  <script type="text/javascript" src="./scripts.js"></script>
+</body>
+
 </html>

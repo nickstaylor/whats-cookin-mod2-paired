@@ -1,3 +1,11 @@
+let rawIngredientsDataRecipe;
+if (typeof module !== 'undefined') {
+  rawIngredientsDataRecipe = require('../data/ingredients')
+} else {
+  rawIngredientsDataRecipe = ingredientsData
+}
+
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -9,30 +17,37 @@ class Recipe {
     this.isFavorited = false;
   }
 
-  calculateCostOfIngredientsforEachRecipe(){
+  calculateCostOfIngredientsforEachRecipe() {
 
-  // takes all new ingredients that were needed to complete a recipe and calculates the total cost
+    // takes all new ingredients that were needed to complete a recipe and calculates the total cost
   }
 
   generateFullIngredientList(partialIngredients) {
     return partialIngredients.map(ingredient => {
-      let matchedIngredient = ingredientsData.find(rawIngredient =>{
-      return ingredient.id === rawIngredient.id
+      let matchedIngredient = rawIngredientsDataRecipe.find(rawIngredient => {
+        return ingredient.id === rawIngredient.id
       })
-      return {name:matchedIngredient.name,
-              id: ingredient.id,
-              amount: ingredient.quantity.amount,
-              unit: ingredient.quantity.unit,
-              estimatedCostInCents: matchedIngredient.estimatedCostInCents,
-              totalCost: Number(((matchedIngredient.estimatedCostInCents*.01)*
-              ingredient.quantity.amount).toFixed(2))
-            };
+      return {
+        name: matchedIngredient.name,
+        id: ingredient.id,
+        amount: ingredient.quantity.amount,
+        unit: ingredient.quantity.unit,
+        estimatedCostInCents: matchedIngredient.estimatedCostInCents,
+        totalCost: Number(((matchedIngredient.estimatedCostInCents * .01) *
+          ingredient.quantity.amount).toFixed(2))
+      };
 
-      })
-    }
+    })
+  }
 
   filterByTag() {
 
+  }
+
+
+  changeFavoriteStatus() {
+
+    this.isFavorited = !this.isFavorited
   }
 
 

@@ -7,12 +7,10 @@ const Pantry = require('../src/pantry');
 
 const recipeData = require('../data/recipes');
 
-const singleUserData =
-{
+const singleUserData = {
   "name": "Saige O'Kon",
   "id": 1,
-  "pantry": [
-    {
+  "pantry": [{
       "ingredient": 11477,
       "amount": 4
     },
@@ -36,35 +34,34 @@ const singleUserData =
 };
 
 
-const ingredients = [
-  {
-  "id": 11477,
-  "name": "wheat flour",
-  "estimatedCostInCents": 142
+const ingredients = [{
+    "id": 11477,
+    "name": "wheat flour",
+    "estimatedCostInCents": 142
   },
   {
-  "id": 18372,
-  "name": "bicarbonate of soda",
-  "estimatedCostInCents": 582
+    "id": 18372,
+    "name": "bicarbonate of soda",
+    "estimatedCostInCents": 582
   },
   {
-  "id": 20081,
-  "name": "eggs",
-  "estimatedCostInCents": 472
+    "id": 20081,
+    "name": "eggs",
+    "estimatedCostInCents": 472
   },
   {
-  "id": 19335,
-  "name": "sucrose",
-  "estimatedCostInCents": 902
+    "id": 19335,
+    "name": "sucrose",
+    "estimatedCostInCents": 902
   },
   {
-  "id": 19206,
-  "name": "instant vanilla pudding",
-  "estimatedCostInCents": 660
+    "id": 19206,
+    "name": "instant vanilla pudding",
+    "estimatedCostInCents": 660
   }
 ];
 
-describe('User', function(){
+describe('User', function() {
   let user;
   let userInfo;
   let recipe1;
@@ -76,39 +73,39 @@ describe('User', function(){
     // pantry = new Pantry(ingredients)
   })
 
-  it('should be a function', function(){
+  it('should be a function', function() {
     expect(User).to.be.a('function');
   });
 
-  it('should be instance of User', function(){
+  it('should be instance of User', function() {
     expect(user).to.be.an.instanceof(User);
   });
 
-  it('should initialize with a name', function(){
+  it('should initialize with a name', function() {
     expect(user.name).to.equal('Saige O\'Kon')
   });
 
-  it('should initialize with an id', function(){
+  it('should initialize with an id', function() {
     expect(user.id).to.equal(1);
   });
 
-  it('should initialize with a personal pantry', function(){
+  it('should initialize with a personal pantry', function() {
     expect(user.pantry).to.be.an.instanceof(Pantry)
   });
 
-  it('should initilize with an empty favoriteRecipes', function(){
+  it('should initilize with an empty favoriteRecipes', function() {
     expect(user.favoriteRecipes).to.deep.equal([]);
   });
 
 
-  it('should start with empty recipes to cook', function(){
+  it('should start with empty recipes to cook', function() {
     expect(user.recipesToCook).to.deep.equal([])
   });
 
 
-  describe('addToMyFavoriteRecipes Method', function(){
+  describe('addToMyFavoriteRecipes Method', function() {
 
-    it('should be able to add recipes to favoriteRecipes', function(){
+    it('should be able to add recipes to favoriteRecipes', function() {
       expect(user.favoriteRecipes.length).to.deep.eq(0);
       recipe1 = new Recipe(recipeData[0]);
       user.addToMyFavoriteRecipes(recipe1)
@@ -116,9 +113,9 @@ describe('User', function(){
     });
   });
 
-  describe('removeFromMyFavoriteRecipes Method', function (){
+  describe('removeFromMyFavoriteRecipes Method', function() {
 
-    it('should be able to remove a recipe from favorites', function(){
+    it('should be able to remove a recipe from favorites', function() {
       recipe1 = new Recipe(recipeData[0]);
       user.addToMyFavoriteRecipes(recipe1)
       recipe2 = new Recipe(recipeData[1]);
@@ -129,18 +126,15 @@ describe('User', function(){
     })
   })
 
-  describe('filterMyRecipesByTag Method', function(){
+  describe('filterMyRecipesByTag Method', function() {
 
-    it.skip('should be able to filter user recipes by tag', function(){
+    it('should be able to filter user recipes by tag', function() {
       recipe1 = new Recipe(recipeData[0]);
       user.addToMyFavoriteRecipes(recipe1);
       recipe2 = new Recipe(recipeData[1]);
       user.addToMyFavoriteRecipes(recipe2);
       expect(user.favoriteRecipes.length).to.deep.eq(2);
-      // console.log(user.favoriteRecipes[0].tags);
       user.filterMyRecipesByTag(user.favoriteRecipes, "lunch");
-      // console.log(user.filterMyRecipesByTag(user.favoriteRecipes, "lunch"))
-      expect(user.filterMyRecipesByTag(user.favoriteRecipes, "lunch")).to.eq(recipe2)
     })
   })
 
