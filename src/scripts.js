@@ -2,6 +2,9 @@ let mainSection = document.querySelector('.main-recipe-card-container')
 let searchBox = document.querySelector('.search-input')
 var bodyContainer = document.querySelector('body');
 let favoriteBtn = document.querySelector("add-recipe-to-favorite-btn");
+let searchByTagField = document.querySelector('#tags');
+let enterBtn = document.querySelector('#enter')
+let navBar = document.querySelector('#nav-bar')
 let allRecipes = [];
 let randomNumber = ((Math.ceil(Math.random() * 49)));
 const user = new User(usersData[randomNumber], ingredientsData)
@@ -30,7 +33,17 @@ let eventHandler = (event)=>{
     addRecipeToFavorites(event);
   } else if (event.target.id === 'favorites-btn') {
     displayFavoriteRecipes()
+  } else if (event.target.id === "enter") {
+    enterSite()
   }
+}
+
+
+const enterSite = () => {
+  let welcomeBanner = document.querySelector('.welcome-banner')
+  welcomeBanner.classList.add('hidden');
+  navBar.classList.remove("hidden");
+  displayRecipes(allRecipes);
 }
 
 
@@ -61,6 +74,13 @@ const displayFavoriteRecipes = () => {
     let favoriteBtn = document.querySelector('.add-recipe-to-favorite-btn')
     favoriteBtn.style.color = "green";
   });
+}
+
+
+const searchByTag = () => {
+ let selectedTag = searchByTagField.value
+ let matchedRecipes = user.filterMyRecipesByTag(allRecipes, selectedTag);
+  displayRecipes(matchedRecipes)
 }
 
 
@@ -157,7 +177,6 @@ const addRecipeToFavorites = (event) => {
       favoritedRecipe.changeFavoriteStatus();
       updateRecepiesArray(favoritedRecipe)
       user.addToMyFavoriteRecipes(favoritedRecipe);
-      // console.log(favoritedRecipe);
     }
 }
 
@@ -169,11 +188,6 @@ const updateRecepiesArray = (favoritedRecipe) => {
     console.log(allRecipes);
     let value = allRecipes.indexOf(matchedRecipe)
     allRecipes[value] = favoritedRecipe;
-    // console.log(value);
-    // allRecipes.splice(value, 1, favoritedRecipe)
-    // console.log(value);
-    // console.log(favoritedRecipe);
-    // console.log(allRecipes);
 }
 
 
@@ -184,9 +198,9 @@ const fillUpRecipeArray = (recipeData) => {
   });
 }
 
-let displayRecipes = (allRecipes) => {
+let displayRecipes = (recipesArry) => {
   mainSection.innerHTML = " ";
-  allRecipes.forEach(recipe => {
+  recipesArry.forEach(recipe => {
     // debugger
     if(recipe.isFavorited === true) {
         mainSection.insertAdjacentHTML("afterbegin",`
@@ -223,7 +237,7 @@ let displayRecipes = (allRecipes) => {
  const executeSearch = () => {
    let filter = searchBox.value.toUpperCase();
    let recipeName = [...document.getElementsByTagName('h2')]
-
+    console.log(recipeName);
    recipeName.forEach(name => {
 
      if(name.innerText.toUpperCase().indexOf(filter) > -1) {
@@ -242,4 +256,3 @@ searchBox.addEventListener("keyup", executeSearch);
 
 welcomeTheUser();
 fillUpRecipeArray(recipeData)
-displayRecipes(allRecipes);
