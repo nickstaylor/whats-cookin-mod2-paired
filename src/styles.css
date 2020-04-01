@@ -3,7 +3,6 @@
   cursor: default;
   margin: 0;
   padding: 0;
-  /* font-family: 'Lobster', cursive; */
   color: #1D9AF2;
   letter-spacing: 0.02em;
 }
@@ -28,11 +27,12 @@ nav {
   position: fixed;
   width: 100%;
   height: 100px;
-  /* z-index: 10; */
 }
+
 nav p {
   font-size: 1.4em;
 }
+
 nav h1 {
   font-size: 2.5em;
 }
@@ -94,11 +94,9 @@ main {
 .search-button {
     border-radius: 10px 0px 0px 10px;
     border: none;
-
-
 }
 
-.mask{
+.mask {
   height: 60px;
   width: 60px;
 }
@@ -115,7 +113,7 @@ main {
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 }
 
@@ -131,6 +129,7 @@ main {
 .ingredient-span {
   color: black;
 }
+
 .pantry-headline {
   color: white;
   display: block;
@@ -140,8 +139,6 @@ main {
   font-size: 2.5em;
 }
 
-
-
 .recipe-container h2 {
   font-size: 1.5em;
   text-align: center;
@@ -149,7 +146,7 @@ main {
   font-family: 'Lobster', cursive;
 }
 
-.recipe-nav{
+.recipe-nav {
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
@@ -187,8 +184,6 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
-
-
 .recipe-container button:hover,
 .pop-up-recipe-container button:hover {
 box-shadow: 1px 1px #53a7ea, 2px 2px #53a7ea, 3px 3px #53a7ea;
@@ -202,7 +197,6 @@ transform: translateX(-3px);
   width: 300px;
   border-radius: 10px;
 }
-
 
 .tilt-in-top-1 {
   animation: tilt-in-top-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -219,10 +213,9 @@ transform: translateX(-3px);
   }
 }
 
-.pantry-container{
+.pantry-container {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .pop-up-recipe-container {
@@ -239,7 +232,7 @@ transform: translateX(-3px);
   "l f f";
   width: 1000px;
   height: 675px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
   border-radius: 10px;
 }
@@ -277,7 +270,7 @@ transform: translateX(-3px);
 }
 
 
-.full-recipe-img{
+.full-recipe-img {
   text-align: center;
   border-radius: 10px;
   height: 200px;
@@ -320,7 +313,7 @@ transform: translateX(-3px);
   margin-left: 50px;
 }
 
-.cost-list{
+.cost-list {
   font-size: 1em;
 }
 
@@ -345,11 +338,10 @@ transform: translateX(-3px);
 .cost-list h2 {
   text-align: left;
   font-size: 1.5em;
-
 }
 
 .instructions-list ol li,
-.cost-list ol li{
+.cost-list ol li {
   margin: 8px;
 }
 
@@ -357,7 +349,6 @@ transform: translateX(-3px);
   text-align: center;
   font-size: 2em;
 }
-
 
 .hidden {
   display: none;
