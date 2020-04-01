@@ -158,10 +158,10 @@ main {
 .recipe-container button {
   font-family: 'Lobster', cursive;
   height: 50px;
-  width: 100px;
+  width: 150px;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: .9em;
+  font-size: 1.2em;
   color: #1D9AF2;
   background-color: #292D3E;
   border: 1px solid #1D9AF2;
@@ -274,7 +274,6 @@ transform: translateX(-3px);
   align-items: center;
   font-family: 'Lobster', cursive;
   font-size: 1.2em;
-  border: 1px solid black;
 }
 
 
@@ -352,6 +351,11 @@ transform: translateX(-3px);
 .instructions-list ol li,
 .cost-list ol li{
   margin: 8px;
+}
+
+.pop-up-recipe-bottom h2 {
+  text-align: center;
+  font-size: 2em;
 }
 
 
