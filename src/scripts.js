@@ -361,23 +361,6 @@ let displayRecipes = (recipesArry) => {
   });
 };
 
-// let displayRecipes = (recipeData) => {
-//   mainSection.innerHTML = " "
-//   recipeData.forEach(recipe => {
-//     let singleRecipe = new Recipe(recipe)
-//     allRecipes.push(singleRecipe);
-//     mainSection.insertAdjacentHTML("afterbegin", `
-//     <div class="recipe-container tilt-in-top-1">
-//       <img class="recipe-image" src="${singleRecipe.image}" alt="">
-//       <h2>${singleRecipe.name}</h2>
-//       <div class="recipe-nav">
-//         <button class="view-recipe" id="${singleRecipe.id}-view" type="button" name="button">View Recipe</button>
-//         <button class="add-recipe-to-favorite-btn" id="${singleRecipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
-//       </div>
-//       `);
-//   })
-// }
-
 
 const executeSearch = () => {
   let filter = searchBox.value.toUpperCase();
