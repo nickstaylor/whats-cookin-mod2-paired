@@ -2,6 +2,9 @@ let mainSection = document.querySelector('.main-recipe-card-container')
 let searchBox = document.querySelector('.search-input')
 var bodyContainer = document.querySelector('body');
 let allRecipes = [];
+let userMoney = 1000
+let seeInstructionsAgain = false;
+// let purchaseItemsToCook = false;
 let randomNumber = ((Math.ceil(Math.random() * 49)));
 const user = new User(usersData[randomNumber], ingredientsData)
 let userName = document.querySelector('.user-name')
@@ -29,6 +32,12 @@ let eventHandler = (event)=>{
     displayFavoriteRecipes()
   } else if (target.contains('cook-recipe')) {
     checkPantryIngredients()
+  } else if (target.contains('instructions-again')){
+    seeInstructionsAgain = true
+    unhideInstructions();
+  } else if (target.contains('purchase-items')){
+    // seeInstructionsAgain = false
+    unhideInstructions()
   }
 }
 
@@ -43,40 +52,131 @@ const checkPantryIngredients = () => {
   })
   console.log('UserPantry:' + user.pantry.ingredients.length)
   console.log('RecipeIngredients:' + selectedRecipe.ingredients.length);
-  console.log(user.pantry.ingredients)
   console.log(selectedRecipe.ingredients);
 
+  //make this its own function
+  // compareLikeIngredients(selectedRecipe.ingredients)
 
+  selectedRecipe.ingredients.forEach(recipe=>{
+    user.pantry.ingredients.forEach(user=>{
+      if (user.id === recipe.id && user.amount < recipe.amount) {
+        console.log(user.name + " userAmount: "+ user.amount)
+        console.log(recipe.name + " recipeAmount: "+ recipe.amount)
+        partialIngredients.push({id: user.id,
+        name: user.name,
+        amountNeeded: recipe.amount - user.amount,
+        totalCost: (recipe.estimatedCostInCents * (recipe.amount - user.amount)) * .01})
+      }
+    })
+  })
+
+
+  ///functionCompareLikeIngredients(array1, array2)
+  let userPantry = user.pantry.ingredients
+  let recipePantry = selectedRecipe.ingredients
   if (selectedRecipe.ingredients.length > user.pantry.ingredients.length){
-  let unique = selectedRecipe.ingredients.forEach(recipe=>{
-   user.pantry.ingredients.forEach(ingredient=>{
-    if (ingredient.id == recipe.id){
+      selectedRecipe.ingredients.forEach(recipe=>{
+      user.pantry.ingredients.forEach(ingredient=>{
+        if (ingredient.id == recipe.id){
       console.log(ingredient.id)
       console.log(recipe.id)
-      const value = selectedRecipe.ingredients.indexOf(recipe)
-      selectedRecipe.ingredients.splice(value, 1)
-      }
+        const value = selectedRecipe.ingredients.indexOf(recipe)
+        selectedRecipe.ingredients.splice(value, 1)
+        }
     })
   })} else {
-      let unique = user.pantry.ingredients.forEach(ingredient=>{
+      user.pantry.ingredients.forEach(ingredient=>{
       selectedRecipe.ingredients.forEach(recipe=>{
-      if (ingredient.id == recipe.id){
+        if (ingredient.id == recipe.id){
       console.log(ingredient.id)
       console.log(recipe.id)
-      const value = selectedRecipe.ingredients.indexOf(recipe)
-      selectedRecipe.ingredients.splice(value, 1)
-      }
+        const value = selectedRecipe.ingredients.indexOf(recipe)
+        selectedRecipe.ingredients.splice(value, 1)
+        }
+      })
     })
-  })}
-missingIngredients.push.apply(missingIngredients,selectedRecipe.ingredients)
-console.log(missingIngredients)
-
+  }
+  missingIngredients.push.apply(missingIngredients,selectedRecipe.ingredients)
+  displayPantryRecipeInfo(missingIngredients, partialIngredients, selectedRecipe)
 }
 
 
 
+const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selectedRecipe) =>{
+  let checkPantrySection = document.querySelector('.pop-up-recipe-bottom');
+  checkPantrySection.innerHTML = "";
+  let costSection = document.querySelector('.instructions-list');
+  costSection.innerHTML = "";
+
+  if (missingIngredients.length === 0 && partialIngredients.length === 0){
+
+    checkPantrySection.insertAdjacentHTML("afterbegin", `
+    <h4>You have all of the ingredients! Enjoy Cooking!</h4> `)
+  } else {
+
+    let neededIngredients = '<ol>'
+    missingIngredients.forEach(ingredient=>{
+      neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
+       Number(((ingredient.estimatedCostInCents*.01)*
+       ingredient.amount).toFixed(2)) + '</li>'
+    });
+    neededIngredients = neededIngredients + '</ol>';
+    console.log(neededIngredients)
 
 
+    costSection.insertAdjacentHTML("afterbegin", `
+    <section class ="cost-list">
+    <h2>Great! You only need a few things:</h2>
+     ${neededIngredients}
+      </section>`)
+      checkPantrySection.insertAdjacentHTML("afterbegin", `
+        <h4>You have $${userMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} to purchase.</h4>
+        <button class="purchase-items" id="${selectedRecipe.id}-view" type="button" name="purchase-items">Purchase Items</button>
+        <button class="instructions-again" id="${selectedRecipe.id}-view" type="button" name="instructions-again">See Instructions Again</button>
+      `)
+  console.log(missingIngredients)
+  console.log(partialIngredients)
+  console.log(selectedRecipe)
+  }
+
+}
+
+const unhideInstructions = () => {
+
+  let costSection = document.querySelector('.instructions-list')
+  costSection.innerHTML = ""
+  let checkPantrySection = document.querySelector('.pop-up-recipe-bottom')
+  checkPantrySection.innerHTML = ""
+  let idOfClickedRecipe = event.target.id.split("-")[0];
+  let selectedRecipe = allRecipes.find(recipe=>{
+    return recipe.id === Number(idOfClickedRecipe)
+  })
+  let instructionsDisplayed = '<ol>'
+  selectedRecipe.instructions.forEach(instruction=>{
+    instructionsDisplayed = instructionsDisplayed + '<li class="pop-up-instructions">' +
+    instruction.instruction + '</li>'
+  });
+  instructionsDisplayed = instructionsDisplayed + '</ol>'
+
+    costSection.insertAdjacentHTML("afterbegin", `
+    <h2>Recipe Instructions</h2>
+    ${instructionsDisplayed}
+  </section>
+  `)
+
+  if (seeInstructionsAgain === true){
+    checkPantrySection.insertAdjacentHTML("afterbegin", `
+    <h4>Does your pantry have all the ingredients?</h4>
+    <button class="cook-recipe" id="${selectedRecipe.id}-view"
+    type="button" name="cook-recipce">Cook Recipe!</button>
+    `)
+  } else { //enter in cost amount here and enjoy cokking message
+    checkPantrySection.insertAdjacentHTML("afterbegin", `
+    <h4>Let's Cook!</h4>
+    `)
+  }
+  seeInstructionsAgain = false;
+}
 
 
 const displayFavoriteRecipes = () => {
@@ -99,7 +199,6 @@ const displayFavoriteRecipes = () => {
 
 let displayUserPantry = () => {
   mainSection.innerHTML = " ";
-  let userMoney = 10000
   let userFullName = `${user.name}`
   let userFirstName = userFullName.split(" ").shift();
   mainSection.insertAdjacentHTML("afterbegin", `
@@ -165,8 +264,9 @@ let displayRecipeDetails = () => {
     </section>
     <section class ="pop-up-recipe-bottom">
       <h4>Does your pantry have all the ingredients?</h4>
-      <button class="cook-recipe" id="${selectedRecipe.id}-view" type="button" name="check-pantry">Cook Recipe!</button>
+      <button class="cook-recipe" id="${selectedRecipe.id}-view" type="button" name="cook-recipce">Cook Recipe!</button>
     </section>
+
   </div>`)
   return selectedRecipe
 }
