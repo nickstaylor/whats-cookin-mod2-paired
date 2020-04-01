@@ -8,11 +8,28 @@
     <link href="styles.css" type="text/css" rel="stylesheet">
   </head>
   <body>
-    <nav>
-      <p id="pantry-btn">My Pantry</p>
+    <nav class="hidden" id="nav-bar">
+      <div class="pantry-favories-container">
+        <p id="pantry-btn">My Pantry</p>
+        <p id="favorites-btn">My Favorites</p>
+      </div>
       <img class="mask" src ="../images/mask.png" alt="face icon"/>
       <h1 class="user-name"></h1>
-      <p id="favorites-btn">My Favorites</p>
+      <label for="cars">Select by tag:</label>
+      <select id="tags" onchange ="searchByTag()" >
+        <option value="antipasti">Antipasti</option>
+        <option value="starter">Starter</option>
+        <option value="snack">Snack</option>
+        <option value="appetizer">Appetizer</option>
+        <option value="antipasto">Antipasto</option>
+        <option value="hor d'oeuvr">Hor d'oeuvr</option>
+        <option value="main course">Main course</option>
+        <option value="main dish">Main dish</option>
+        <option value="dinner">Dinner</option>
+        <option value="sauce">Sauce</option>
+        <option value="side dish">Side dish</option>
+        <option value="lunch">Lunch</option>
+      </select>
       <p class ="all-recipes-btn" id="recipe-btn">All Recipes</p>
       <div class="search-container">
       <button type="submit-button" class="search-button">
@@ -23,6 +40,11 @@
     </div>
     </nav>
     <main class="main-recipe-card-container">
+      <section class="welcome-banner">
+      <h1>Welcome to Cooking with COVID</h1>
+      <h2>Your Friendly Virus</h2>
+      <button class="enter-btn" id="enter">Glove-Up And Enter</button>
+      </section>
     </main>
 
     <script type="text/javascript" src="../data/users.js"></script>
