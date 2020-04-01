@@ -35,13 +35,7 @@ class Recipe {
     })
   }
 
-  filterByTag() {
-
-  }
-
-
   changeFavoriteStatus() {
-
     this.isFavorited = !this.isFavorited
   }
 
