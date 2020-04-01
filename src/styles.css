@@ -3,7 +3,6 @@
   cursor: default;
   margin: 0;
   padding: 0;
-  /* font-family: 'Lobster', cursive; */
   color: #1D9AF2;
   letter-spacing: 0.02em;
 }
@@ -16,7 +15,6 @@ body {
     "main";
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: 100px 100vh;
-
 }
 
 nav {
@@ -28,13 +26,50 @@ nav {
   position: fixed;
   width: 100%;
   height: 100px;
-  /* z-index: 10; */
 }
 nav p {
   font-size: 1.4em;
 }
 nav h1 {
   font-size: 2.5em;
+}
+
+.welcome-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 39%;
+  height: 449px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
+  border-radius: 10px;
+  margin-top: 150px;
+}
+
+.enter-btn {
+  font-family: 'Lobster', cursive;
+  height: 70px;
+  width: 158px;
+  margin-left: 10px;
+  margin-top: 25px;
+  margin-right: 10px;
+  font-size: 1.2em;
+  color: #1D9AF2;
+  background-color: #292D3E;
+  border: 1px solid #1D9AF2;
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.welcome-banner h1 {
+  font-size: 2em;
+}
+
+.welcome-banner h2 {
+  font-size: 1.5em;
 }
 
 #pantry-btn:hover,
@@ -55,7 +90,7 @@ text-decoration: underline;
 
 main {
   grid-area: main;
-  background: repeat center/100% url(../images/cuttingboard.jpg);
+  background: repeat center/100% url(../images/cuttingboard-2.jpg);
   background-attachment: fixed;
   height: 100vh;
   background-size: cover;
@@ -74,7 +109,6 @@ main {
   padding: 5px;
   border: none;
   outline: none;
-
 }
 
 .search-container {
@@ -88,14 +122,11 @@ main {
   height: 35px;
   width: 35px;
   padding: 3px;
-
 }
 
 .search-button {
     border-radius: 10px 0px 0px 10px;
     border: none;
-
-
 }
 
 .mask{
@@ -113,8 +144,8 @@ main {
   align-items: center;
   justify-content: space-around;
   margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 }
@@ -190,7 +221,8 @@ main {
 
 
 .recipe-container button:hover,
-.pop-up-recipe-container button:hover {
+.pop-up-recipe-container button:hover,
+.enter-btn:hover {
 box-shadow: 1px 1px #53a7ea, 2px 2px #53a7ea, 3px 3px #53a7ea;
 transform: translateX(-3px);
 }
@@ -207,6 +239,7 @@ transform: translateX(-3px);
 .tilt-in-top-1 {
   animation: tilt-in-top-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
 
 @keyframes tilt-in-top-1 {
   0% {
