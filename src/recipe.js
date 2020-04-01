@@ -17,11 +17,6 @@ class Recipe {
     this.isFavorited = false;
   }
 
-  calculateCostOfIngredientsforEachRecipe() {
-
-    // takes all new ingredients that were needed to complete a recipe and calculates the total cost
-  }
-
   generateFullIngredientList(partialIngredients) {
     return partialIngredients.map(ingredient => {
       let matchedIngredient = rawIngredientsDataRecipe.find(rawIngredient => {
