@@ -33,6 +33,9 @@ Clone down the repo. Use terminal commands to navigate to the root folder of the
 ![](screen_shots/when-you-cook.png)
 
 
+### Live site link
+[Github Pages](https://ttarlov.github.io/whats-cookin-mod2-paired/)
+
 ### App in Action
 ![WhatsCooking1](https://user-images.githubusercontent.com/44849120/78206060-55634000-748d-11ea-9317-9320bc8a7d7f.gif)
 
