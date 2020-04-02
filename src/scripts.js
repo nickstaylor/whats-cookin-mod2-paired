@@ -1,9 +1,7 @@
 let mainSection = document.querySelector('.main-recipe-card-container')
 let searchBox = document.querySelector('.search-input')
 var bodyContainer = document.querySelector('body');
-let favoriteBtn = document.querySelector("add-recipe-to-favorite-btn");
 let searchByTagField = document.querySelector('#tags');
-let enterBtn = document.querySelector('#enter')
 let navBar = document.querySelector('#nav-bar')
 let allRecipes = [];
 let userMoney = 10000
@@ -85,7 +83,7 @@ const findUniqueIngredients = (recipeIngredients, userIngredients) => {
 const compareLikeIngredients = (recipeIngredients, userIngredients) => {
   recipeIngredients.forEach(recipeIngredient => {
     userIngredients.forEach(userIngredient => {
-      if (userIngredient.id == recipeIngredient.id) {
+      if (userIngredient.id === recipeIngredient.id) {
         const value = recipeIngredients.indexOf(recipeIngredient)
         recipeIngredients.splice(value, 1)
       }
