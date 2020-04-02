@@ -12,18 +12,17 @@ class Pantry {
   }
 
   generateFullIngredientList(partialIngredients) {
-    return partialIngredients.map(ingredient => {
+      return partialIngredients.map(ingredient => {
 
-      let matchedIngredient = rawIngredientsDataPantry.find(rawIngredient => {
-        return ingredient.ingredient === rawIngredient.id
-      })
+      let matchedIngredient = rawIngredientsDataPantry.find(rawIngredient =>{
+          return ingredient.ingredient === rawIngredient.id
+        })
 
-      return {
-        name: matchedIngredient.name,
-        id: matchedIngredient.id,
-        estimatedCostInCents: matchedIngredient.estimatedCostInCents,
-        amount: ingredient.amount
-      };
+        return {name:matchedIngredient.name,
+                id: matchedIngredient.id,
+                estimatedCostInCents: matchedIngredient.estimatedCostInCents,
+                amount: ingredient.amount
+              };
     })
   }
 

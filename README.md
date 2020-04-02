@@ -40,6 +40,7 @@ Clone down the repo. Use terminal commands to navigate to the root folder of the
 
 ![WhatsCooking3](https://user-images.githubusercontent.com/44849120/78206175-a6733400-748d-11ea-9e56-c154c47fe2c1.gif)
 
+
 ### Technologies Used
 
 * HTML
@@ -63,4 +64,8 @@ The biggest challenges of this project were manipulating data, writing effective
 
 ## Wins
 
-The biggest win of this project was fully completing user stories and also adding extra features. Additionally we spent a lot of time setting up our data in way that made it easy to work with. We were able to complete a lot of the project requirements because we set up the data in a very usable way. 
+The biggest win of this project was fully completing user stories and also adding extra features. Additionally we spent a lot of time setting up our data in way that made it easy to work with. We were able to complete a lot of the project requirements because we set up the data in a very usable way.  
+
+## Collaborators
+[Nick Taylor](https://github.com/nickstaylor)
+[Taras Tarlov](https://github.com/ttarlov)
