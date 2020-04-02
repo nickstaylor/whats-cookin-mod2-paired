@@ -71,8 +71,6 @@ describe('Pantry', function() {
       }
     ]);
 
-
   })
-
 
 });

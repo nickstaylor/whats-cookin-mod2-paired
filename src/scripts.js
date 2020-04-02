@@ -21,7 +21,6 @@ let welcomeTheUser = () => {
   userName.insertAdjacentHTML("afterbegin", `Hi <span class= "first-name">${userFirstName}!</span> What's Cookin?`);
 }
 
-
 let eventHandler = (event) => {
   let target = event.target.classList
   if (target.contains('view-recipe')) {
@@ -87,8 +86,6 @@ const compareLikeIngredients = (recipeIngredients, userIngredients) => {
   recipeIngredients.forEach(recipeIngredient => {
     userIngredients.forEach(userIngredient => {
       if (userIngredient.id == recipeIngredient.id) {
-        console.log(userIngredient.id)
-        console.log(recipeIngredient.id)
         const value = recipeIngredients.indexOf(recipeIngredient)
         recipeIngredients.splice(value, 1)
       }
@@ -106,9 +103,6 @@ const checkPantryIngredients = () => {
   let selectedRecipe = allRecipes.find(recipe => {
     return recipe.id === Number(idOfClickedRecipe)
   })
-  console.log('UserPantry:' + user.pantry.ingredients.length)
-  console.log('RecipeIngredients:' + selectedRecipe.ingredients.length);
-  console.log(selectedRecipe.ingredients);
 
   let recipeIngredients = selectedRecipe.ingredients;
   let userIngredients = user.pantry.ingredients
@@ -139,17 +133,13 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
       neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
         Number(((ingredient.estimatedCostInCents * .01) *
           ingredient.amount).toFixed(2)) + '</li>';
-      console.log(totalCost)
     });
     partialIngredients.forEach(ingredient => {
-      console.log(totalCost)
       totalCost += ingredient.totalCost
       neededIngredients = neededIngredients + '<li>' + ingredient.name + ' <b>Cost</b>: $' +
         ingredient.totalCost + '</li>'
       neededIngredients = neededIngredients + '</ol>';
     });
-    console.log(neededIngredients)
-    console.log(totalCost);
 
     userMoney = Number(userMoney.toFixed(2));
     costSection.insertAdjacentHTML("afterbegin", `
@@ -163,9 +153,6 @@ const displayPantryRecipeInfo = (missingIngredients, partialIngredients, selecte
         <button class="purchase-items" id="${selectedRecipe.id}-view" type="button" name="purchase-items">Purchase Items</button>
         <button class="instructions-again" id="${selectedRecipe.id}-view" type="button" name="instructions-again">See Instructions Again</button>
       `)
-    console.log(missingIngredients)
-    console.log(partialIngredients)
-    console.log(selectedRecipe)
   }
 
 }
@@ -241,7 +228,6 @@ const searchByTag = () => {
 
 
 let displayUserPantry = () => {
-  console.log(userMoney)
   mainSection.innerHTML = " ";
   let userFullName = `${user.name}`
   let userFirstName = userFullName.split(" ").shift();
@@ -285,7 +271,6 @@ let displayRecipeDetails = () => {
       '. <b>Total cost</b>: $' + ingredient.totalCost + '</li>'
   });
   ingredientsDisplayed = ingredientsDisplayed + '</ul>';
-  console.log(Number(recipeTotalCost.toFixed(2)))
 
   mainSection.insertAdjacentHTML("afterbegin", `
   <div class="pop-up-recipe-container">
@@ -313,8 +298,6 @@ let displayRecipeDetails = () => {
     </section>
   </div>`)
 }
-
-
 
 const addRecipeToFavorites = (event) => {
   let idOfClickedRecipe = event.target.id.split("-")[0];
@@ -378,24 +361,6 @@ let displayRecipes = (recipesArry) => {
   });
 };
 
-// let displayRecipes = (recipeData) => {
-//   mainSection.innerHTML = " "
-//   recipeData.forEach(recipe => {
-//     let singleRecipe = new Recipe(recipe)
-//     allRecipes.push(singleRecipe);
-//     mainSection.insertAdjacentHTML("afterbegin", `
-//     <div class="recipe-container tilt-in-top-1">
-//       <img class="recipe-image" src="${singleRecipe.image}" alt="">
-//       <h2>${singleRecipe.name}</h2>
-//       <div class="recipe-nav">
-//         <button class="view-recipe" id="${singleRecipe.id}-view" type="button" name="button">View Recipe</button>
-//         <button class="add-recipe-to-favorite-btn" id="${singleRecipe.id}-favorite" type="button" name="button">+/- My Favorites</button>
-//       </div>
-//       `);
-//   })
-// }
-
-
 const executeSearch = () => {
   let filter = searchBox.value.toUpperCase();
   let recipeName = [...document.getElementsByTagName('h2')]
@@ -407,7 +372,6 @@ const executeSearch = () => {
     }
   });
 };
-
 
 bodyContainer.addEventListener('click', eventHandler);
 searchBox.addEventListener("keyup", executeSearch);
