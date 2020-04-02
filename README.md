@@ -1,51 +1,64 @@
-# What's Cookin'? Starter Kit 
+# Cooking with COVID- Your Friendly Virus
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
-
-## Set Up 
-
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
-
-## Testing 
-
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
-
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+Now that you have more time at home, and all the restaurants and closed, it's time to start cooking. Welcome to Cooking with COVID. Browse tons of recipes
+favorite ones you like and even check your pantry for ingredients. The App allows you to get full recipe instructions and a run down on ingredient cost for each recipe. LET'S COOK!
 
 
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
+## Installing / Getting started
 
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
+Clone down the repo. Use terminal commands to navigate to the root folder of the repo locally.
 
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+1. npm install
+2. cd into src folder
+3. open index.html
+
+## Steps to use the App
+
+1. First thing you will see when the app is loaded is the welcome banner.
+
+2. You can search recipes by title or category.
+
+3. When you click on a specific recipe a new window appears with ingredients and instruction details.  
+
+4. You can check your pantry to see if you have enough ingredients to cook a chosen recipe. If you don't have enough ingredients, no problem! We give each user $10,000 to purchase ingredients. That's a real stimulus right there!
+
+5. Store your favorite recipes in My Favorites.
+
+![](screen-shots/front-page.png)
+![](screen-shots/main-page.png)
+![](screen-shots/single-recipe.png)
+![](screen-shots/favorites.png)
+![](screen-shots/pantry.png)
+![](screen-shots/check-cost.png)
+![](screen_shots/when-you-cook.png)
+
+
+### App in Action
+![](screen_shots/WhatsCooking1.gif)
+![](screen_shots/WhatsCooking2.gif)
+![](screen_shots/WhatsCooking3.gif)
+
+### Technologies Used
+
+* HTML
+* CSS
+* Mocha/Chai (testing)
+* Vanilla JS
+
+
+## Learning Goals
+
+## Solidify and demonstrate understanding of the following:
+* Testing Class Properties and Methods with Mocha/Chai
+* Implement TDD
+* Practice Array Prototypes
+* Data Restructuring
+
+
+## Challenges
+
+The biggest challenges of this project were manipulating data, writing effective methods that produce consistent data. Another challenge was using TDD to structure classes and methods.
+
+## Wins
+
+The biggest win of this project was fully completing user stories and also adding extra features. Additionally we spent a lot of time setting up our data in way that made it easy to work with. We were able to complete a lot of the project requirements because we set up the data in a very usable way. 
