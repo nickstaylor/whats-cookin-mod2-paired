@@ -26,15 +26,19 @@ Clone down the repo. Use terminal commands to navigate to the root folder of the
 
 ![](screen-shots/front-page.png)
 ![](screen-shots/main-page.png)
-![](src/screen-shots/single-recipe.png)
-![](src/screen-shots/favorites.png)
-![](src/screen-shots/pantry.png)
-![](src/screen-shots/check-cost.png)
-![](src/screen_shots/when-you-cook.png)
+![](screen-shots/single-recipe.png)
+![](screen-shots/favorites.png)
+![](screen-shots/pantry.png)
+![](screen-shots/check-cost.png)
+![](screen_shots/when-you-cook.png)
 
 
 ### App in Action
-![](src/screen_shots/traveler_interaction.gif)
+![WhatsCooking1](https://user-images.githubusercontent.com/44849120/78206060-55634000-748d-11ea-9317-9320bc8a7d7f.gif)
+
+![WhatsCooking2](https://user-images.githubusercontent.com/44849120/78206152-978c8180-748d-11ea-87d6-b7231e6db034.gif)
+
+![WhatsCooking3](https://user-images.githubusercontent.com/44849120/78206175-a6733400-748d-11ea-9e56-c154c47fe2c1.gif)
 
 
 ### Technologies Used
@@ -61,3 +65,7 @@ The biggest challenges of this project were manipulating data, writing effective
 ## Wins
 
 The biggest win of this project was fully completing user stories and also adding extra features. Additionally we spent a lot of time setting up our data in way that made it easy to work with. We were able to complete a lot of the project requirements because we set up the data in a very usable way.  
+
+## Collaborators
+[Nick Taylor](https://github.com/nickstaylor)
+[Taras Tarlov](https://github.com/ttarlov)
