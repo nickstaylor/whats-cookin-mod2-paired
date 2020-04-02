@@ -34,9 +34,11 @@ Clone down the repo. Use terminal commands to navigate to the root folder of the
 
 
 ### App in Action
-![](screen_shots/WhatsCooking1.gif)
-![](screen_shots/WhatsCooking2.gif)
-![](screen_shots/WhatsCooking3.gif)
+![WhatsCooking1](https://user-images.githubusercontent.com/44849120/78206060-55634000-748d-11ea-9317-9320bc8a7d7f.gif)
+
+![WhatsCooking2](https://user-images.githubusercontent.com/44849120/78206152-978c8180-748d-11ea-87d6-b7231e6db034.gif)
+
+![WhatsCooking3](https://user-images.githubusercontent.com/44849120/78206175-a6733400-748d-11ea-9e56-c154c47fe2c1.gif)
 
 ### Technologies Used
 
